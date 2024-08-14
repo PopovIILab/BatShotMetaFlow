@@ -1,7 +1,7 @@
 <svg width="1172" height="2721" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" overflow="hidden"><defs>
     <style type="text/css">
       <![CDATA[
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700');
         text { 
           font-family: 'Montserrat', sans-serif; 
         }
