@@ -7,6 +7,6 @@ Please wait for more details!
 
 **Pipeline:**
 
-<img src="https://github.com/PopovIILab/BatShotMetaFlow/blob/main/imgs/Pipeline.svg" width="75%"/>
+<img src="https://github.com/PopovIILab/BatShotMetaFlow/blob/main/imgs/Pipeline.png" width="75%"/>
 
 _Figure 1. Pipeline overview._
