@@ -1,0 +1,215 @@
+2024-07-20 20:23:03.439552 INFO::Writing function arguments to log file
+2024-07-20 20:23:03.459275 DEBUG::Function arguments
+2024-07-20 20:23:03.477916 DEBUG::Output folder: MaAsLin2_results/class
+2024-07-20 20:23:03.479404 DEBUG::Min Abundance: 0.000000
+2024-07-20 20:23:03.480905 DEBUG::Min Prevalence: 0.010000
+2024-07-20 20:23:03.482647 DEBUG::Normalization: TSS
+2024-07-20 20:23:03.484141 DEBUG::Transform: LOG
+2024-07-20 20:23:03.485562 DEBUG::Analysis method: LM
+2024-07-20 20:23:03.487106 DEBUG::Max significance: 0.050000
+2024-07-20 20:23:03.489185 DEBUG::Random effects:
+2024-07-20 20:23:03.49067 DEBUG::Fixed effects: Group
+2024-07-20 20:23:03.492072 DEBUG::Correction method: BH
+2024-07-20 20:23:03.493522 DEBUG::Standardize: TRUE
+2024-07-20 20:23:03.495156 DEBUG::Cores: 1
+2024-07-20 20:23:03.496633 INFO::Verifying options selected are valid
+2024-07-20 20:23:03.54853 INFO::Determining format of input files
+2024-07-20 20:23:03.551542 INFO::Input format is data samples as rows and metadata samples as rows
+2024-07-20 20:23:03.555469 DEBUG::A total of 10 samples were found in both the data and metadata
+2024-07-20 20:23:03.556951 DEBUG::Reordering data/metadata to use same sample ordering
+2024-07-20 20:23:03.560759 INFO::Formula for fixed effects: expr ~  Group
+2024-07-20 20:23:03.56479 INFO::Filter data based on min abundance and min prevalence
+2024-07-20 20:23:03.567558 INFO::Total samples in data: 10
+2024-07-20 20:23:03.570366 INFO::Min samples required with min abundance for a feature not to be filtered: 0.100000
+2024-07-20 20:23:03.584253 INFO::Total filtered features: 0
+2024-07-20 20:23:03.587329 INFO::Filtered feature names from abundance and prevalence filtering:
+2024-07-20 20:23:03.596764 INFO::Total filtered features with variance filtering: 0
+2024-07-20 20:23:03.599678 INFO::Filtered feature names from variance filtering:
+2024-07-20 20:23:03.602278 INFO::Running selected normalization method: TSS
+2024-07-20 20:23:04.953133 INFO::Applying z-score to standardize continuous metadata
+2024-07-20 20:23:04.987755 INFO::Running selected transform method: LOG
+2024-07-20 20:23:04.997203 INFO::Running selected analysis method: LM
+2024-07-20 20:23:05.009708 INFO::Fitting model to feature number 1, Coprothermobacteria
+2024-07-20 20:23:05.024345 INFO::Fitting model to feature number 2, Nitrospinia
+2024-07-20 20:23:05.03213 INFO::Fitting model to feature number 3, Chrysiogenetes
+2024-07-20 20:23:05.038824 INFO::Fitting model to feature number 4, Calditrichia
+2024-07-20 20:23:05.045858 INFO::Fitting model to feature number 5, Caldisericia
+2024-07-20 20:23:05.05272 INFO::Fitting model to feature number 6, Atribacteria
+2024-07-20 20:23:05.059951 INFO::Fitting model to feature number 7, Thermodesulfobiia
+2024-07-20 20:23:05.067516 INFO::Fitting model to feature number 8, Elusimicrobia
+2024-07-20 20:23:05.074365 INFO::Fitting model to feature number 9, Endomicrobiia
+2024-07-20 20:23:05.140881 INFO::Fitting model to feature number 10, Dictyoglomia
+2024-07-20 20:23:05.148639 INFO::Fitting model to feature number 11, Deltaproteobacteria
+2024-07-20 20:23:05.155018 INFO::Fitting model to feature number 12, Synergistia
+2024-07-20 20:23:05.162025 INFO::Fitting model to feature number 13, Thermodesulfovibrionia
+2024-07-20 20:23:05.170419 INFO::Fitting model to feature number 14, Nitrospiria
+2024-07-20 20:23:05.178088 INFO::Fitting model to feature number 15, Candidatus.Saccharimonadia
+2024-07-20 20:23:05.186194 INFO::Fitting model to feature number 16, Candidatus.Babeliae
+2024-07-20 20:23:05.193605 INFO::Fitting model to feature number 17, Aquificae
+2024-07-20 20:23:05.200266 INFO::Fitting model to feature number 18, Deferribacteres
+2024-07-20 20:23:05.207409 INFO::Fitting model to feature number 19, Oligoflexia
+2024-07-20 20:23:05.213897 INFO::Fitting model to feature number 20, Bdellovibrionia
+2024-07-20 20:23:05.220248 INFO::Fitting model to feature number 21, Bacteriovoracia
+2024-07-20 20:23:05.227322 INFO::Fitting model to feature number 22, Thermotogae
+2024-07-20 20:23:05.233948 INFO::Fitting model to feature number 23, Blastocatellia
+2024-07-20 20:23:05.240931 INFO::Fitting model to feature number 24, Vicinamibacteria
+2024-07-20 20:23:05.247513 INFO::Fitting model to feature number 25, Holophagae
+2024-07-20 20:23:05.254195 INFO::Fitting model to feature number 26, Terriglobia
+2024-07-20 20:23:05.261093 INFO::Fitting model to feature number 27, Syntrophia
+2024-07-20 20:23:05.417449 INFO::Fitting model to feature number 28, Desulfomonilia
+2024-07-20 20:23:05.4237 INFO::Fitting model to feature number 29, Candidatus.Desulfofervidia
+2024-07-20 20:23:05.429885 INFO::Fitting model to feature number 30, Syntrophobacteria
+2024-07-20 20:23:05.436181 INFO::Fitting model to feature number 31, Desulfobaccia
+2024-07-20 20:23:05.442387 INFO::Fitting model to feature number 32, Thermodesulfobacteria
+2024-07-20 20:23:05.448974 INFO::Fitting model to feature number 33, Desulfarculia
+2024-07-20 20:23:05.455663 INFO::Fitting model to feature number 34, Desulfobulbia
+2024-07-20 20:23:05.462052 INFO::Fitting model to feature number 35, Desulfobacteria
+2024-07-20 20:23:05.469339 INFO::Fitting model to feature number 36, Desulfuromonadia
+2024-07-20 20:23:05.476328 INFO::Fitting model to feature number 37, Desulfovibrionia
+2024-07-20 20:23:05.483073 INFO::Fitting model to feature number 38, Spirochaetia
+2024-07-20 20:23:05.489964 INFO::Fitting model to feature number 39, Myxococcia
+2024-07-20 20:23:05.496385 INFO::Fitting model to feature number 40, Fusobacteriia
+2024-07-20 20:23:05.503449 INFO::Fitting model to feature number 41, Desulfurellia
+2024-07-20 20:23:05.509983 INFO::Fitting model to feature number 42, Epsilonproteobacteria
+2024-07-20 20:23:05.516335 INFO::Fitting model to feature number 43, Lentisphaeria
+2024-07-20 20:23:05.522648 INFO::Fitting model to feature number 44, Tichowtungiia
+2024-07-20 20:23:05.529685 INFO::Fitting model to feature number 45, Kiritimatiellia
+2024-07-20 20:23:05.536237 INFO::Fitting model to feature number 46, Spartobacteria
+2024-07-20 20:23:05.543512 INFO::Fitting model to feature number 47, Methylacidiphilae
+2024-07-20 20:23:05.550058 INFO::Fitting model to feature number 48, Opitutae
+2024-07-20 20:23:05.557088 INFO::Fitting model to feature number 49, Verrucomicrobiae
+2024-07-20 20:23:05.564584 INFO::Fitting model to feature number 50, Candidatus.Brocadiia
+2024-07-20 20:23:05.57106 INFO::Fitting model to feature number 51, Phycisphaerae
+2024-07-20 20:23:05.582827 INFO::Fitting model to feature number 52, Candidatus.Uabimicrobiia
+2024-07-20 20:23:05.591425 INFO::Fitting model to feature number 53, Planctomycetia
+2024-07-20 20:23:05.60268 INFO::Fitting model to feature number 54, Chlamydiia
+2024-07-20 20:23:05.615125 INFO::Fitting model to feature number 55, Fibrobacteria
+2024-07-20 20:23:05.625279 INFO::Fitting model to feature number 56, Candidatus.Cloacimonadia
+2024-07-20 20:23:05.636459 INFO::Fitting model to feature number 57, Gemmatimonadetes
+2024-07-20 20:23:05.648854 INFO::Fitting model to feature number 58, Balneolia
+2024-07-20 20:23:05.658871 INFO::Fitting model to feature number 59, Rhodothermia
+2024-07-20 20:23:05.668077 INFO::Fitting model to feature number 60, Ignavibacteria
+2024-07-20 20:23:05.676975 INFO::Fitting model to feature number 61, Chlorobiia
+2024-07-20 20:23:05.685138 INFO::Fitting model to feature number 62, Saprospiria
+2024-07-20 20:23:05.693566 INFO::Fitting model to feature number 63, Chitinophagia
+2024-07-20 20:23:05.701627 INFO::Fitting model to feature number 64, Sphingobacteriia
+2024-07-20 20:23:05.709893 INFO::Fitting model to feature number 65, Cytophagia
+2024-07-20 20:23:05.717856 INFO::Fitting model to feature number 66, Bacteroidia
+2024-07-20 20:23:05.725839 INFO::Fitting model to feature number 67, Flavobacteriia
+2024-07-20 20:23:05.733905 INFO::Fitting model to feature number 68, Vulcanimicrobiia
+2024-07-20 20:23:05.741898 INFO::Fitting model to feature number 69, Chthonomonadetes
+2024-07-20 20:23:05.75007 INFO::Fitting model to feature number 70, Fimbriimonadia
+2024-07-20 20:23:05.758189 INFO::Fitting model to feature number 71, Armatimonadia
+2024-07-20 20:23:05.766545 INFO::Fitting model to feature number 72, Thermomicrobia
+2024-07-20 20:23:05.774715 INFO::Fitting model to feature number 73, Candidatus.Thermofonsia
+2024-07-20 20:23:05.7828 INFO::Fitting model to feature number 74, Ktedonobacteria
+2024-07-20 20:23:05.791038 INFO::Fitting model to feature number 75, Anaerolineae
+2024-07-20 20:23:05.799244 INFO::Fitting model to feature number 76, Caldilineae
+2024-07-20 20:23:05.807385 INFO::Fitting model to feature number 77, Ardenticatenia
+2024-07-20 20:23:05.815553 INFO::Fitting model to feature number 78, Tepidiformia
+2024-07-20 20:23:05.82376 INFO::Fitting model to feature number 79, Thermoflexia
+2024-07-20 20:23:05.831905 INFO::Fitting model to feature number 80, Chloroflexia
+2024-07-20 20:23:05.839814 INFO::Fitting model to feature number 81, Dehalococcoidia
+2024-07-20 20:23:05.84792 INFO::Fitting model to feature number 82, Deinococci
+2024-07-20 20:23:05.856037 INFO::Fitting model to feature number 83, Cyanophyceae
+2024-07-20 20:23:05.86402 INFO::Fitting model to feature number 84, Candidatus.Izimaplasma
+2024-07-20 20:23:05.872005 INFO::Fitting model to feature number 85, Mollicutes
+2024-07-20 20:23:05.880014 INFO::Fitting model to feature number 86, Nitriliruptoria
+2024-07-20 20:23:05.888072 INFO::Fitting model to feature number 87, Rubrobacteria
+2024-07-20 20:23:05.896056 INFO::Fitting model to feature number 88, Acidimicrobiia
+2024-07-20 20:23:05.904151 INFO::Fitting model to feature number 89, Coriobacteriia
+2024-07-20 20:23:05.91221 INFO::Fitting model to feature number 90, Thermoleophilia
+2024-07-20 20:23:05.920329 INFO::Fitting model to feature number 91, Actinomycetes
+2024-07-20 20:23:05.928433 INFO::Fitting model to feature number 92, Limnochordia
+2024-07-20 20:23:05.936445 INFO::Fitting model to feature number 93, Dethiobacteria
+2024-07-20 20:23:05.944635 INFO::Fitting model to feature number 94, Negativicutes
+2024-07-20 20:23:05.952833 INFO::Fitting model to feature number 95, Erysipelotrichia
+2024-07-20 20:23:05.960779 INFO::Fitting model to feature number 96, Tissierellia
+2024-07-20 20:23:05.96923 INFO::Fitting model to feature number 97, Clostridia
+2024-07-20 20:23:05.977986 INFO::Fitting model to feature number 98, Bacilli
+2024-07-20 20:23:05.987011 INFO::Fitting model to feature number 99, Hydrogenophilia
+2024-07-20 20:23:05.995943 INFO::Fitting model to feature number 100, Zetaproteobacteria
+2024-07-20 20:23:06.004541 INFO::Fitting model to feature number 101, Acidithiobacillia
+2024-07-20 20:23:06.013058 INFO::Fitting model to feature number 102, Betaproteobacteria
+2024-07-20 20:23:06.021737 INFO::Fitting model to feature number 103, Alphaproteobacteria
+2024-07-20 20:23:06.029751 INFO::Fitting model to feature number 104, Gammaproteobacteria
+2024-07-20 20:23:06.037754 INFO::Fitting model to feature number 105, Magnoliopsida
+2024-07-20 20:23:06.045785 INFO::Fitting model to feature number 106, Cryptophyceae
+2024-07-20 20:23:06.054007 INFO::Fitting model to feature number 107, Eumycetozoa
+2024-07-20 20:23:06.062145 INFO::Fitting model to feature number 108, Kinetoplastea
+2024-07-20 20:23:06.070332 INFO::Fitting model to feature number 109, Chlorarachniophyceae
+2024-07-20 20:23:06.07842 INFO::Fitting model to feature number 110, Bacillariophyceae
+2024-07-20 20:23:06.086426 INFO::Fitting model to feature number 111, Coscinodiscophyceae
+2024-07-20 20:23:06.094534 INFO::Fitting model to feature number 112, Oligohymenophorea
+2024-07-20 20:23:06.102662 INFO::Fitting model to feature number 113, Conoidasida
+2024-07-20 20:23:06.110575 INFO::Fitting model to feature number 114, Aconoidasida
+2024-07-20 20:23:06.118342 INFO::Fitting model to feature number 115, Malasseziomycetes
+2024-07-20 20:23:06.126318 INFO::Fitting model to feature number 116, Ustilaginomycetes
+2024-07-20 20:23:06.135033 INFO::Fitting model to feature number 117, Tremellomycetes
+2024-07-20 20:23:06.142943 INFO::Fitting model to feature number 118, Agaricomycetes
+2024-07-20 20:23:06.150842 INFO::Fitting model to feature number 119, Pucciniomycetes
+2024-07-20 20:23:06.158942 INFO::Fitting model to feature number 120, Schizosaccharomycetes
+2024-07-20 20:23:06.166877 INFO::Fitting model to feature number 121, Saccharomycetes
+2024-07-20 20:23:06.174741 INFO::Fitting model to feature number 122, Dothideomycetes
+2024-07-20 20:23:06.183597 INFO::Fitting model to feature number 123, Eurotiomycetes
+2024-07-20 20:23:06.191475 INFO::Fitting model to feature number 124, Leotiomycetes
+2024-07-20 20:23:06.199515 INFO::Fitting model to feature number 125, Sordariomycetes
+2024-07-20 20:23:06.207443 INFO::Fitting model to feature number 126, Candidatus.Nanohalobia
+2024-07-20 20:23:06.215325 INFO::Fitting model to feature number 127, Nanobdellia
+2024-07-20 20:23:06.223298 INFO::Fitting model to feature number 128, Candidatus.Micrarchaeia
+2024-07-20 20:23:06.231137 INFO::Fitting model to feature number 129, Candidatus.Lokiarchaeia
+2024-07-20 20:23:06.239039 INFO::Fitting model to feature number 130, Thermoplasmata
+2024-07-20 20:23:06.246938 INFO::Fitting model to feature number 131, Conexivisphaeria
+2024-07-20 20:23:06.254701 INFO::Fitting model to feature number 132, Nitrososphaeria
+2024-07-20 20:23:06.26245 INFO::Fitting model to feature number 133, Thermoprotei
+2024-07-20 20:23:06.270262 INFO::Fitting model to feature number 134, Candidatus.Methanoliparia
+2024-07-20 20:23:06.278107 INFO::Fitting model to feature number 135, Methanonatronarchaeia
+2024-07-20 20:23:06.286933 INFO::Fitting model to feature number 136, Archaeoglobi
+2024-07-20 20:23:06.294967 INFO::Fitting model to feature number 137, Thermococci
+2024-07-20 20:23:06.302847 INFO::Fitting model to feature number 138, Methanopyri
+2024-07-20 20:23:06.310877 INFO::Fitting model to feature number 139, Methanobacteria
+2024-07-20 20:23:06.318874 INFO::Fitting model to feature number 140, Methanococci
+2024-07-20 20:23:06.326868 INFO::Fitting model to feature number 141, Methanomicrobia
+2024-07-20 20:23:06.338481 INFO::Fitting model to feature number 142, Halobacteria
+2024-07-20 20:23:06.346819 INFO::Fitting model to feature number 143, Laserviricetes
+2024-07-20 20:23:06.354638 INFO::Fitting model to feature number 144, Faserviricetes
+2024-07-20 20:23:06.362677 INFO::Fitting model to feature number 145, Huolimaviricetes
+2024-07-20 20:23:06.371499 INFO::Fitting model to feature number 146, Malgrandaviricetes
+2024-07-20 20:23:06.379724 INFO::Fitting model to feature number 147, Tokiviricetes
+2024-07-20 20:23:06.387877 INFO::Fitting model to feature number 148, Naldaviricetes
+2024-07-20 20:23:06.395999 INFO::Fitting model to feature number 149, Chrymotiviricetes
+2024-07-20 20:23:06.404269 INFO::Fitting model to feature number 150, Resentoviricetes
+2024-07-20 20:23:06.412998 INFO::Fitting model to feature number 151, Howeltoviricetes
+2024-07-20 20:23:06.42142 INFO::Fitting model to feature number 152, Leviviricetes
+2024-07-20 20:23:06.429426 INFO::Fitting model to feature number 153, Stelpaviricetes
+2024-07-20 20:23:06.437456 INFO::Fitting model to feature number 154, Duplopiviricetes
+2024-07-20 20:23:06.445576 INFO::Fitting model to feature number 155, Pisoniviricetes
+2024-07-20 20:23:06.4536 INFO::Fitting model to feature number 156, Magsaviricetes
+2024-07-20 20:23:06.4618 INFO::Fitting model to feature number 157, Tolucaviricetes
+2024-07-20 20:23:06.47023 INFO::Fitting model to feature number 158, Flasuviricetes
+2024-07-20 20:23:06.478401 INFO::Fitting model to feature number 159, Alsuviricetes
+2024-07-20 20:23:06.486226 INFO::Fitting model to feature number 160, Insthoviricetes
+2024-07-20 20:23:06.494205 INFO::Fitting model to feature number 161, Ellioviricetes
+2024-07-20 20:23:06.503131 INFO::Fitting model to feature number 162, Monjiviricetes
+2024-07-20 20:23:06.511439 INFO::Fitting model to feature number 163, Revtraviricetes
+2024-07-20 20:23:06.519469 INFO::Fitting model to feature number 164, Polintoviricetes
+2024-07-20 20:23:06.527688 INFO::Fitting model to feature number 165, Maveriviricetes
+2024-07-20 20:23:06.53578 INFO::Fitting model to feature number 166, Tectiliviricetes
+2024-07-20 20:23:06.544073 INFO::Fitting model to feature number 167, Pokkesviricetes
+2024-07-20 20:23:06.556652 INFO::Fitting model to feature number 168, Megaviricetes
+2024-07-20 20:23:06.563325 INFO::Fitting model to feature number 169, Herviviricetes
+2024-07-20 20:23:06.569386 INFO::Fitting model to feature number 170, Caudoviricetes
+2024-07-20 20:23:06.575405 INFO::Fitting model to feature number 171, Arfiviricetes
+2024-07-20 20:23:06.581889 INFO::Fitting model to feature number 172, Repensiviricetes
+2024-07-20 20:23:06.588655 INFO::Fitting model to feature number 173, Papovaviricetes
+2024-07-20 20:23:06.595792 INFO::Fitting model to feature number 174, Quintoviricetes
+2024-07-20 20:23:06.6375 INFO::Counting total values for each feature
+2024-07-20 20:23:06.651043 INFO::Writing filtered data to file MaAsLin2_results/class/features/filtered_data.tsv
+2024-07-20 20:23:06.660636 INFO::Writing filtered, normalized data to file MaAsLin2_results/class/features/filtered_data_norm.tsv
+2024-07-20 20:23:06.674157 INFO::Writing filtered, normalized, transformed data to file MaAsLin2_results/class/features/filtered_data_norm_transformed.tsv
+2024-07-20 20:23:06.687705 INFO::Writing residuals to file MaAsLin2_results/class/fits/residuals.rds
+2024-07-20 20:23:06.693016 INFO::Writing fitted values to file MaAsLin2_results/class/fits/fitted.rds
+2024-07-20 20:23:06.697786 INFO::Writing all results to file (ordered by increasing q-values): MaAsLin2_results/class/all_results.tsv
+2024-07-20 20:23:06.709094 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.050000 ) to file (ordered by increasing q-values): MaAsLin2_results/class/significant_results.tsv
+2024-07-20 20:23:06.71384 INFO::Writing heatmap of significant results to file: MaAsLin2_results/class/heatmap.pdf
+2024-07-20 20:23:06.721265 INFO::Writing association plots (one for each significant association) to output folder: MaAsLin2_results/class
