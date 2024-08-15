@@ -1,0 +1,3 @@
+Sample	Unique Reads	Duplicate Reads
+D5_combined_R1	17058201	18970831
+D5_combined_R2	17741706	18287326
