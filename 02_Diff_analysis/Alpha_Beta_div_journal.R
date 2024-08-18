@@ -1,12 +1,9 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-library(tidyverse)
-library(ggtext)
-library(patchwork)
-library(vegan)
-library(glue)
-library(scales)
+if (!require("pacman")) install.packages("pacman")
+
+pacman::p_load(tidyverse, ggtext, patchwork, vegan, glue, scales)
 
 ###################
 # Alpha-diversity #

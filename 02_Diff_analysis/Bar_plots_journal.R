@@ -1,17 +1,9 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-library(tidyverse)
-library(ggtext)
-library(patchwork)
-library(paletteer)
-library(data.table)
-library(tibble)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(scales)
+if (!require("pacman")) install.packages("pacman")
 
+pacman::p_load(tidyverse, ggtext, patchwork, paletteer, data.table, tibble, dplyr, tidyr, ggplot2, scales)
 
 #################################
 ##########Taxa_bar_plots#########

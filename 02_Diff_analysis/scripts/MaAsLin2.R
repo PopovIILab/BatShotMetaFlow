@@ -1,7 +1,9 @@
 #!/usr/bin/env Rscript
 args <- commandArgs(trailingOnly=TRUE)
 
-library(Maaslin2)
+if (!require("pacman")) install.packages("pacman")
+
+pacman::p_load(Maaslin2)
 
 metadata <- read.table(args[1], 
                        sep=',', comment='', head=T)
