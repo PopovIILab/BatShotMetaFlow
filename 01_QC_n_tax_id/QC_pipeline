@@ -3,6 +3,7 @@ SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
 rule all:
     input:
         expand("multiqc_reports/{sample}", sample=SAMPLES)
+        expand("multiqc_reports/{sample}", sample=SAMPLES)
 
 rule run_fastqc:
     input:
@@ -15,15 +16,18 @@ rule run_fastqc:
         """
         mkdir -p fastqc_reports/{wildcards.sample}
         fastqc {input.r1} {input.r2} -o {output}
+        fastqc {input.r1} {input.r2} -o {output}
         """
 
 rule run_multiqc:
     input:
+        rules.run_fastqc.output
         rules.run_fastqc.output
     output:
         directory("multiqc_reports/{sample}")
     conda: "qc_n_tax_id.yaml"
     shell:
         """
+        multiqc {input} -o {output}
         multiqc {input} -o {output}
         """
