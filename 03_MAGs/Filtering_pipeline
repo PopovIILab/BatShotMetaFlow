@@ -1,0 +1,18 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("filtered_MAGs/{sample}_filtered.fasta", sample=SAMPLES)
+
+rule run_filtering:
+    input:
+        "MAGs_scaffolds/{sample}_scaffolds/scaffolds.fasta"
+    output:
+        "filtered_MAGs/{sample}_filtered.fasta"
+    params:
+        threshold=3500
+    conda: "mags.yaml"
+    shell:
+        """
+        python scripts/filter_MAGs.py {input} {output} {params.threshold}
+        """

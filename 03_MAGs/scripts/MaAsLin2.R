@@ -19,7 +19,7 @@ counts <- subset(counts, select = -Sample_id)
 fit_data = Maaslin2(input_data     = counts, 
                     input_metadata = metadata, 
                     min_prevalence = 0.01,
-                    normalization  = "TSS",
+                    normalization  = "NONE",
                     output         = args[3],
                     analysis_method = "LM",
                     max_significance = 0.05,

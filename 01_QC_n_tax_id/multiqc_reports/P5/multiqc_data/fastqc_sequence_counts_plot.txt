@@ -1,3 +1,0 @@
-Sample	Unique Reads	Duplicate Reads
-P5_combined_R1	39386568	67552763
-P5_combined_R2	41868261	65071070

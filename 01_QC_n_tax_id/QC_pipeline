@@ -2,32 +2,28 @@ SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
 
 rule all:
     input:
-        expand("multiqc_reports/{sample}/multiqc_report.html", sample=SAMPLES)
+        expand("multiqc_reports/{sample}", sample=SAMPLES)
 
 rule run_fastqc:
     input:
         r1="samples/unified_sequences/{sample}/{sample}_combined_R1.fastq.gz",
         r2="samples/unified_sequences/{sample}/{sample}_combined_R2.fastq.gz"
     output:
-        r1_html="fastqc_reports/{sample}/{sample}_combined_R1_fastqc.html",
-        r1_zip="fastqc_reports/{sample}/{sample}_combined_R1_fastqc.zip",
-        r2_html="fastqc_reports/{sample}/{sample}_combined_R2_fastqc.html",
-        r2_zip="fastqc_reports/{sample}/{sample}_combined_R2_fastqc.zip"
+        directory("fastqc_reports/{sample}")
+    conda: "qc_n_tax_id.yaml"
     shell:
         """
         mkdir -p fastqc_reports/{wildcards.sample}
-        fastqc {input.r1} -o fastqc_reports/{wildcards.sample}
-        fastqc {input.r2} -o fastqc_reports/{wildcards.sample}
+        fastqc {input.r1} {input.r2} -o {output}
         """
 
 rule run_multiqc:
     input:
-        expand("fastqc_reports/{sample}/{sample}_combined_R1_fastqc.html", sample=SAMPLES),
-        expand("fastqc_reports/{sample}/{sample}_combined_R2_fastqc.html", sample=SAMPLES)
+        rules.run_fastqc.output
     output:
-        "multiqc_reports/{sample}/multiqc_report.html"
+        directory("multiqc_reports/{sample}")
+    conda: "qc_n_tax_id.yaml"
     shell:
         """
-        mkdir -p multiqc_reports/{wildcards.sample}
-        multiqc fastqc_reports/{wildcards.sample} -o multiqc_reports/{wildcards.sample}
+        multiqc {input} -o {output}
         """

@@ -1,3 +1,0 @@
-Module	Section	Sample Name	Source
-FastQC	all_sections	D5_combined_R2	/home/user/BatMetagenome2x150/Clean journals/QC_n_tax_id/fastqc_reports/D5/D5_combined_R2_fastqc.zip
-FastQC	all_sections	D5_combined_R1	/home/user/BatMetagenome2x150/Clean journals/QC_n_tax_id/fastqc_reports/D5/D5_combined_R1_fastqc.zip

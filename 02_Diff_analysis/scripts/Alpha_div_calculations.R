@@ -1,7 +1,9 @@
 #!/usr/bin/env Rscript
 args <- commandArgs(trailingOnly=TRUE)
 
-library(vegan)
+if (!require("pacman")) install.packages("pacman")
+
+pacman::p_load(vegan)
 
 data_cult <- read.csv(args[1])
 

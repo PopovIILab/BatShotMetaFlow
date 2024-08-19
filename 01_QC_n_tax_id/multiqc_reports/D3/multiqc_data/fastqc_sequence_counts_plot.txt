@@ -1,3 +1,0 @@
-Sample	Unique Reads	Duplicate Reads
-D3_combined_R1	2009215	8055161
-D3_combined_R2	2233871	7830505

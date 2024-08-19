@@ -1,9 +1,9 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path) 
 setwd(main_dir)
 
-library(tidyverse)
-library(ggrepel)
-library(ggtext)
+if (!require("pacman")) install.packages("pacman")
+
+pacman::p_load(tidyverse, ggtext, ggrepel)
 
 #####################
 ###### SPECIES ######
