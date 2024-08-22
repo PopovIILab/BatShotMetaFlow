@@ -34,7 +34,7 @@
   - [`pathabundance_transposed.csv`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_MAGs/HUMAnN3_results/pathabundance_transposed.csv) - transposed, filtered & normalized pathway abundance table ready for input to `MaAsLin2`
 - [`MaAsLin2_on_HUMAnN3_results`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_MAGs/MaAsLin2_on_HUMAnN3_results) - folder with `MaAsLin2` on `HUMAnN3` results:
   - [`all_results.tsv`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_MAGs/MaAsLin2_on_HUMAnN3_results/all_results.tsv) -  `.tsv` file with all results
-  - [`significant_results.tsv`]([https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_MAGs/ABRicate_results/summary/txt](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_MAGs/MaAsLin2_on_HUMAnN3_results/significant_results.tsv)) - `.tsv` file with significant results only
+  - [`significant_results.tsv`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_MAGs/MaAsLin2_on_HUMAnN3_results/significant_results.tsv) - `.tsv` file with significant results only
 - [`ABRicate_barplots_journal.R`](ABRicate_barplots_journal.R) - laboratory journal to plot `ABRicate` results as `bar-plots`
 - [`ABRicate_heatmaps_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_MAGs/ABRicate_heatmaps_journal.R) - laboratory journal to plot `ABRicate` results as `heatmaps`
 - [`HUMAnN3_heatmaps_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_MAGs/HUMAnN3_heatmaps_journal.R) - laboratory journal to plot `HUMAnN3` results as `heatmap` (pathway abundance table only)
