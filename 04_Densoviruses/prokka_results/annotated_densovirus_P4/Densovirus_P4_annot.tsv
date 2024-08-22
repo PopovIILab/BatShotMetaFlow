@@ -1,0 +1,9 @@
+locus_tag	ftype	length_bp	gene	EC_number	COG	product
+LBBLEHOE_00001	gene	642				
+LBBLEHOE_00001	CDS	642				ORF2 [Densovirinae sp.]
+LBBLEHOE_00002	gene	1782				
+LBBLEHOE_00002	CDS	1782				ORF1 [Parus major densovirus]
+LBBLEHOE_00003	gene	1602				
+LBBLEHOE_00003	CDS	1602				non-structural protein [Blattella germanica densovirus-like virus]
+LBBLEHOE_00004	gene	645				
+LBBLEHOE_00004	CDS	645				hypothetical protein

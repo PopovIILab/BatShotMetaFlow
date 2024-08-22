@@ -1,0 +1,10 @@
+viral_genomes/Densovirus_D1.fasta
+viral_genomes/Densovirus_D2.fasta
+viral_genomes/Densovirus_D3.fasta
+viral_genomes/Densovirus_D4.fasta
+viral_genomes/Densovirus_D5.fasta
+viral_genomes/Densovirus_P1.fasta
+viral_genomes/Densovirus_P2.fasta
+viral_genomes/Densovirus_P3.fasta
+viral_genomes/Densovirus_P4.fasta
+viral_genomes/Densovirus_P5.fasta

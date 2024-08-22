@@ -1,0 +1,9 @@
+locus_tag	ftype	length_bp	gene	EC_number	COG	product
+OONDHMGN_00001	gene	912				
+OONDHMGN_00001	CDS	912				structural protein [Blattella germanica densovirus-like virus]
+OONDHMGN_00002	gene	1782				
+OONDHMGN_00002	CDS	1782				ORF1 [Parus major densovirus]
+OONDHMGN_00003	gene	1602				
+OONDHMGN_00003	CDS	1602				non-structural protein [Blattella germanica densovirus-like virus]
+OONDHMGN_00004	gene	255				
+OONDHMGN_00004	CDS	255				ORF5 [Parus major densovirus]

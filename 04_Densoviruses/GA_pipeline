@@ -1,0 +1,21 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("prokka_results/annotated_densovirus_{sample}", sample=SAMPLES)
+
+rule run_prokka:
+    input:
+        genome = "viral_genomes/Densovirus_{sample}.fasta",
+        proteins = "genbank_seqs/densoviruses_proteins2.fa"
+    params:
+        prefix = "Densovirus_{sample}_annot"
+    threads:
+        24
+    output:
+        directory("prokka_results/annotated_densovirus_{sample}")
+    conda: "denso.yaml"
+    shell:
+        """
+        prokka --kingdom Viruses --outdir {output} --proteins {input.proteins} --addgenes --prefix {params.prefix} {input.genome} --cpus {threads}
+        """

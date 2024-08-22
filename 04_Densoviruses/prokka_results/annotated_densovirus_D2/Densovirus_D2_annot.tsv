@@ -1,0 +1,9 @@
+locus_tag	ftype	length_bp	gene	EC_number	COG	product
+OFLIPNOO_00001	gene	912				
+OFLIPNOO_00001	CDS	912				structural protein [Blattella germanica densovirus-like virus]
+OFLIPNOO_00002	gene	1782				
+OFLIPNOO_00002	CDS	1782				ORF1 [Parus major densovirus]
+OFLIPNOO_00003	gene	1602				
+OFLIPNOO_00003	CDS	1602				non-structural protein [Blattella germanica densovirus-like virus]
+OFLIPNOO_00004	gene	255				
+OFLIPNOO_00004	CDS	255				ORF5 [Parus major densovirus]

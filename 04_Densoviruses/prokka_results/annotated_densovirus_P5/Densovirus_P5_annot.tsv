@@ -1,0 +1,11 @@
+locus_tag	ftype	length_bp	gene	EC_number	COG	product
+IKOMPFPA_00001	gene	912				
+IKOMPFPA_00001	CDS	912				structural protein [Blattella germanica densovirus-like virus]
+IKOMPFPA_00002	gene	1782				
+IKOMPFPA_00002	CDS	1782				ORF1 [Parus major densovirus]
+IKOMPFPA_00003	gene	1602				
+IKOMPFPA_00003	CDS	1602				non-structural protein [Blattella germanica densovirus-like virus]
+IKOMPFPA_00004	gene	255				
+IKOMPFPA_00004	CDS	255				ORF5 [Parus major densovirus]
+IKOMPFPA_00005	gene	345				
+IKOMPFPA_00005	CDS	345				hypothetical protein

@@ -1,0 +1,2 @@
+seqname	trim_orf_index_start	trim_orf_index_end	trim_bp_start	trim_bp_end	trim_pr	trim_pr_max	prox_orf_index_start	prox_orf_index_end	prox_bp_start	prox_bp_end	prox_pr	prox_pr_max	partial	full_orf_index_start	full_orf_index_end	full_bp_start	full_bp_end	pr_full	arc	bac	euk	vir	mix	unaligned	hallmark_cnt	group	shape	seqname_new	final_max_score	final_max_score_group
+NODE_3185_length_5101_cov_878.204034	1	5	25	4937	0.753	0.753	1	5	25	4937	NA	NA	0	1	5	25	4937	0.753	0.0	0.0	0.0	100.0	0.0	0.0	0	dsDNAphage	linear	NODE_3185_length_5101_cov_878.204034||full	0.753	dsDNAphage
