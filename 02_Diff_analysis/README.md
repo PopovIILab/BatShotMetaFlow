@@ -6,9 +6,9 @@
 
 **Files**:
 - [`02_Lab_journal.ipynb`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/02_Lab_journal.ipynb) - laboratory journal with commands to reproduce pipeline
-- [`data`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/data) - folder with `kreport` files obtained from the taxonomic identification step
-  - [`kreports`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/data/kreports) - original `kreport` files
-  - [`mpa`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/data/mpa) - `kreport` files converted to `mpa` format using `KrakenTools`
+- [`data`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/data) - folder with `kreport` files obtained from the [taxonomic identification](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/01_QC_n_tax_id) step
+  - [`kreports`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/data/kreports) - folder with original `kreport` files
+  - [`mpa`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/data/mpa) - folder with `kreport` files converted to `mpa` format using `KrakenTools`
   - [`COMBINED.txt`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/data/COMBINED.txt) - combined `mpa` file
 - [`counts`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/counts) - folder with counts parsed from the combined `mpa` file:
   - [`csv`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/counts/csv) - folder with counts from _species_ to _phylum_ levels in `.csv` file format
