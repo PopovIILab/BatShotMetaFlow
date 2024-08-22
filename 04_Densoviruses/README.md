@@ -18,9 +18,9 @@
   - `{sample}` - results are stored in folders by samples (D1-5; P1-P5):
     - `final-viral-boundary.tsv`
     - `final-viral-score.tsv`
-  - [`prokka_results`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/04_Densoviruses/prokka_results) - folder with results of running `prokka` on extracted from MAGs densoviral genomes:
-    - `annotated_densovirus_{sample}` - results are stored in folders by samples (D1-5; P1-P5):
-      - `Densovirus_{sample}_annot.tsv` - table of genes and CDS
+- [`prokka_results`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/04_Densoviruses/prokka_results) - folder with results of running `prokka` on extracted from MAGs densoviral genomes:
+  - `annotated_densovirus_{sample}` - results are stored in folders by samples (D1-5; P1-P5):
+    - `Densovirus_{sample}_annot.tsv` - table of genes and CDS
 - [`ANI`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/04_Densoviruses/ANI) - folder with results of extracted from MAGs densoviral genomes comparison using `fastANI`:
   - [`fastani.out`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/04_Densoviruses/ANI/fastani.out)
   - [`fastani.out.matrix`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/04_Densoviruses/ANI/fastani.out.matrix)
