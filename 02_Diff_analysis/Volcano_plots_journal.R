@@ -192,7 +192,7 @@ DAA_class$diffabund[DAA_class$coef < -1 & DAA_class$qval < 0.05 & DAA_class$meta
 DAA_class$feature[DAA_class$diffabund == "NO"] <- NA
 DAA_class$label <- NA
 top_red <- DAA_class[DAA_class$coef < -1 & DAA_class$qval < 0.05 & DAA_class$metadata == "Group", ]
-top_red <- top_red[class(top_red$qval), ][1:5, ]
+top_red <- top_red[order(top_red$qval), ][1:5, ]
 DAA_class$label[DAA_class$feature %in% top_red$feature] <- DAA_class$feature[DAA_class$feature %in% top_red$feature]
 DAA_class$label[DAA_class$coef > 1 & DAA_class$qval < 0.05 & DAA_class$metadata == "Group"] <- DAA_class$feature[DAA_class$coef > 1 & DAA_class$qval < 0.05 & DAA_class$metadata == "Group"]
 
@@ -236,7 +236,7 @@ DAA_phylum$diffabund[DAA_phylum$coef < -1 & DAA_phylum$qval < 0.05 & DAA_phylum$
 DAA_phylum$feature[DAA_phylum$diffabund == "NO"] <- NA
 DAA_phylum$label <- NA
 top_red <- DAA_phylum[DAA_phylum$coef < -1 & DAA_phylum$qval < 0.05 & DAA_phylum$metadata == "Group", ]
-top_red <- top_red[phylum(top_red$qval), ][1:5, ]
+top_red <- top_red[order(top_red$qval), ][1:5, ]
 DAA_phylum$label[DAA_phylum$feature %in% top_red$feature] <- DAA_phylum$feature[DAA_phylum$feature %in% top_red$feature]
 DAA_phylum$label[DAA_phylum$coef > 1 & DAA_phylum$qval < 0.05 & DAA_phylum$metadata == "Group"] <- DAA_phylum$feature[DAA_phylum$coef > 1 & DAA_phylum$qval < 0.05 & DAA_phylum$metadata == "Group"]
 
