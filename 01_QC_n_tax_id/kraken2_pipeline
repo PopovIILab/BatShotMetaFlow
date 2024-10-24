@@ -16,8 +16,7 @@ rule run_kraken2:
         db="~/PlusPF"
     threads:
         24
-    conda: "qc_n_tax_id.yaml"
-    conda:  "qc_n_tax_id.yaml"
+    conda: "qc_n_tax_id"
     shell:
         """
         kraken2 --db {params.db} --paired {input.r1} {input.r2} --output {output.output_txt} --report {output.report_txt} --threads {threads}
