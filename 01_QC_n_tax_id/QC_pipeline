@@ -16,7 +16,6 @@ rule run_fastqc:
         """
         mkdir -p fastqc_reports/{wildcards.sample}
         fastqc {input.r1} {input.r2} -o {output}
-        fastqc {input.r1} {input.r2} -o {output}
         """
 
 rule run_multiqc:
@@ -28,6 +27,5 @@ rule run_multiqc:
     conda: "qc_n_tax_id.yaml"
     shell:
         """
-        multiqc {input} -o {output}
         multiqc {input} -o {output}
         """
