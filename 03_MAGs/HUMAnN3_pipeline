@@ -11,7 +11,7 @@ rule run_ABRicate:
         directory("HUMAnN3_results/by_samples/{sample}")
     threads:
         24
-    conda: "mags.yaml"
+    conda: "mags"
     shell:
         """
         humann --input {input} --output {output} --threads {threads}

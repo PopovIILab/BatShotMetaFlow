@@ -13,7 +13,7 @@ rule run_ABRicate:
         card="ABRicate_results/card/{sample}_card.txt",
         resfinder="ABRicate_results/resfinder/{sample}_resfinder.txt",
         vfdb="ABRicate_results/vfdb/{sample}_vfdb.txt"
-    conda: "mags.yaml"
+    conda: "mags"
     shell:
         """
         abricate --db card {input} > {output.card}
