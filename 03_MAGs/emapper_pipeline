@@ -1,0 +1,25 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+NAMES = ["VM1", "VM2", "VM3", "VM4", "VM5", "NN1", "NN2", "NN3", "NN4", "NN5"]
+
+PREFIXES = dict(zip(SAMPLES, NAMES))
+
+rule all:
+    input:
+        expand("eggNOG/{sample}/", sample=SAMPLES)
+
+rule run_emapper:
+    input:
+        "filtered_MAGs/{sample}_filtered.fasta"
+    output:
+        directory("eggNOG/{sample}/")
+    params:
+        prefix=lambda wildcards: PREFIXES[wildcards.sample],
+        db="/home/user/eggNOG-mapper_DB"
+    threads:
+        0
+    conda: "mags"
+    shell:
+        """
+        mkdir -p eggNOG/{wildcards.sample}
+        emapper.py -i {input} --itype metagenome --genepred prodigal -o {params.prefix} --output_dir {output} --data_dir {params.db} --cpu {threads} --override
+        """

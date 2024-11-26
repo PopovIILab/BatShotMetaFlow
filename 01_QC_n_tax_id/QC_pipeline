@@ -1,0 +1,29 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("multiqc_reports/{sample}", sample=SAMPLES)
+
+rule run_fastqc:
+    input:
+        r1="samples/unified_sequences/{sample}/{sample}_combined_R1.fastq.gz",
+        r2="samples/unified_sequences/{sample}/{sample}_combined_R2.fastq.gz"
+    output:
+        directory("fastqc_reports/{sample}")
+    conda: "qc_n_tax_id"
+    shell:
+        """
+        mkdir -p fastqc_reports/{wildcards.sample}
+        fastqc {input.r1} {input.r2} -o {output}
+        """
+
+rule run_multiqc:
+    input:
+        rules.run_fastqc.output
+    output:
+        directory("multiqc_reports/{sample}")
+    conda: "qc_n_tax_id"
+    shell:
+        """
+        multiqc {input} -o {output}
+        """

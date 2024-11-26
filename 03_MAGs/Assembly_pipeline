@@ -1,0 +1,32 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("metaquast_reports/{sample}", sample=SAMPLES)
+
+rule run_SPAdes:
+    input:
+        r1="../QC_n_tax_id/samples/unified_sequences/{sample}/{sample}_combined_R1.fastq.gz",
+        r2="../QC_n_tax_id/samples/unified_sequences/{sample}/{sample}_combined_R2.fastq.gz"
+    output:
+        directory("MAGs_scaffolds/{sample}_scaffolds")
+    threads:
+        24
+    conda: "mags"
+    shell:
+        """
+        SPAdes-4.0.0-Linux/bin/spades.py  --meta  -1  {input.r1}  -2  {input.r2}  -o  {output} --threads {threads}
+        """
+
+rule run_MetaQuast:
+    input:
+        "MAGs_scaffolds/{sample}_scaffolds/scaffolds.fasta"
+    output:
+        directory("metaquast_reports/{sample}")
+    threads:
+        24
+    conda: "mags"
+    shell:
+        """
+        metaquast {input} -o {output} --threads {threads}
+        """

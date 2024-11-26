@@ -1,0 +1,22 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("ABRicate_results/card/{sample}_card.txt", sample=SAMPLES),
+        expand("ABRicate_results/resfinder/{sample}_resfinder.txt", sample=SAMPLES),
+        expand("ABRicate_results/vfdb/{sample}_vfdb.txt", sample=SAMPLES)
+
+rule run_ABRicate:
+    input:
+        "filtered_MAGs/{sample}_filtered.fasta"
+    output:
+        card="ABRicate_results/card/{sample}_card.txt",
+        resfinder="ABRicate_results/resfinder/{sample}_resfinder.txt",
+        vfdb="ABRicate_results/vfdb/{sample}_vfdb.txt"
+    conda: "mags"
+    shell:
+        """
+        abricate --db card {input} > {output.card}
+        abricate --db resfinder {input} > {output.resfinder}
+        abricate --db vfdb {input} > {output.vfdb}
+        """

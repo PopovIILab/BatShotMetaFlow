@@ -1,0 +1,41 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("VirSorter2_results/{sample}", sample=SAMPLES)
+
+rule run_blast:
+    input:
+        "../03_MAGs/filtered_MAGs/{sample}_filtered.fasta"
+    output:
+        "BLAST_vs_densovirus/{sample}_vs_densovirus.out"
+    conda: "denso"
+    shell:
+        """
+        blastn -query {input} -db densovirus_custom_db/densovirus_db -out {output} -evalue 1e-5 -outfmt 6
+        """
+
+rule extract_seqs:
+    input:
+        metagenome = "../03_MAGs/filtered_MAGs/{sample}_filtered.fasta",
+        blast = rules.run_blast.output
+    output:
+        "viral_genomes/Densovirus_{sample}.fasta"
+    conda: "denso"
+    shell:
+        """
+        python scripts/extract_seqs.py {input.metagenome} {input.blast} {output}
+        """
+
+rule run_virsorter2:
+    input:
+        rules.extract_seqs.output
+    output:
+        directory("VirSorter2_results/{sample}")
+    threads:
+        24
+    conda: "vs2"
+    shell:
+        """
+        virsorter run -w {output} -i {input} -j {threads} all
+        """

@@ -1,0 +1,23 @@
+SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
+
+rule all:
+    input:
+        expand("kraken2_reports/{sample}/{sample}_kraken_output.txt", sample=SAMPLES),
+        expand("kraken2_reports/{sample}/{sample}_kraken_report.txt", sample=SAMPLES)
+
+rule run_kraken2:
+    input:
+        r1="samples/unified_sequences/{sample}/{sample}_combined_R1.fastq.gz",
+        r2="samples/unified_sequences/{sample}/{sample}_combined_R2.fastq.gz"
+    output:
+        output_txt="kraken2_reports/{sample}/{sample}_kraken_output.txt",
+        report_txt="kraken2_reports/{sample}/{sample}_kraken_report.txt"
+    params:
+        db="~/PlusPF"
+    threads:
+        24
+    conda: "qc_n_tax_id"
+    shell:
+        """
+        kraken2 --db {params.db} --paired {input.r1} {input.r2} --output {output.output_txt} --report {output.report_txt} --threads {threads}
+        """
