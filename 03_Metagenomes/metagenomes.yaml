@@ -1,4 +1,4 @@
-name: mags
+name: metagenomes
 channels:
   - bioconda
   - conda-forge

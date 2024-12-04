@@ -22,9 +22,9 @@
   - 📝 [`MaAsLin2.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/MaAsLin2.R) - script to run `MaAsLin2` on `HUMAnN3` results (it purposely does not uses any normalization method)
 
 **Instruction**:
-- Create new environment `mags`
+- Create new environment `metagenomes`
 ```bash
-conda env create -f mags.yaml
+conda env create -f metagenomes.yaml
 ```
 
 ### System
