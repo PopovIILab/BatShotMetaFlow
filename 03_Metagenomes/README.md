@@ -2,7 +2,7 @@
 
 > This is the repository for supplementary materials for the upcoming publication
 
-## Metagenomic analysis 🧬
+## Metagenome-assembled genomes 🧬 
 
 **Files**:
 - 📑 [`03_Lab_journal.ipynb`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/03_Lab_journal.ipynb) - laboratory journal with commands to reproduce pipeline
@@ -20,6 +20,18 @@
   - 📝 [`filt_humann3.py`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/filt_humann3.py) - script to filter out redundant info from `HUMAnN3` outputs
   - 📝 [`transpose_humann.py`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/transpose_humann.py) - script to transpose `HUMAnN3` output & prepare it for input in `MaAsLin2`
   - 📝 [`MaAsLin2.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/MaAsLin2.R) - script to run `MaAsLin2` on `HUMAnN3` results (it purposely does not uses any normalization method)
+
+**Instruction**:
+- Create new environment `mags`
+```bash
+conda env create -f mags.yaml
+```
+
+### System
+
+This part of work was done on DSTU's server
+
+<!---
 - 📁 [`ABRicate_results/summary`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_Metagenomes/ABRicate_results/summary) - folder with merged `ABRicate` summary outputs:
   - 📁 [`presence`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_Metagenomes/ABRicate_results/summary/presence) - in `.tsv` file format with `presence/abscence` type
   - 📁 [`tsv`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_Metagenomes/ABRicate_results/summary/tsv) - in `.tsv` file format
@@ -39,13 +51,4 @@
 - 📑 [`ABRicate_heatmaps_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/ABRicate_heatmaps_journal.R) - laboratory journal to plot `ABRicate` results as `heatmaps`
 - 📑 [`HUMAnN3_heatmaps_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/HUMAnN3_heatmaps_journal.R) - laboratory journal to plot `HUMAnN3` results as `heatmap` (pathway abundance table only)
 - 📑 [`mags.yaml`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/mags.yaml) - conda environment
-
-**Instruction**:
-- Create new environment `mags`
-```bash
-conda env create -f mags.yaml
-```
-
-### System
-
-This part of work was done on DSTU's server
+-->
