@@ -9,7 +9,7 @@ pacman::p_load(tidyverse, ggtext, ggrepel)
 ###### SPECIES ######
 #####################
 
-DAA_species <- read.csv("MaAsLin2_results/species/all_results.tsv", sep = "")
+DAA_species <- read.csv("MaAsLin2_results/species/all_results.tsv", sep = "\t")
 
 DAA_species$diffabund <- "NO"
 DAA_species$diffabund[DAA_species$coef > 1 & DAA_species$qval < 0.05 & DAA_species$metadata == "Group"] <- "NN_plus"
@@ -53,7 +53,7 @@ ggsave("images/volcano_plots/volcano_plot_species.png", plot = volcano_plot_spec
 ###### GENUS ######
 ###################
 
-DAA_genus <- read.csv("MaAsLin2_results/genus/all_results.tsv", sep = "")
+DAA_genus <- read.csv("MaAsLin2_results/genus/all_results.tsv", sep = "\t")
 
 DAA_genus$diffabund <- "NO"
 DAA_genus$diffabund[DAA_genus$coef > 1 & DAA_genus$qval < 0.05 & DAA_genus$metadata == "Group"] <- "NN_plus"
@@ -97,7 +97,7 @@ ggsave("images/volcano_plots/volcano_plot_genus.png", plot = volcano_plot_genus,
 ###### FAMILY ######
 ####################
 
-DAA_family <- read.csv("MaAsLin2_results/family/all_results.tsv", sep = "")
+DAA_family <- read.csv("MaAsLin2_results/family/all_results.tsv", sep = "\t")
 
 DAA_family$diffabund <- "NO"
 DAA_family$diffabund[DAA_family$coef > 1 & DAA_family$qval < 0.05 & DAA_family$metadata == "Group"] <- "NN_plus"
@@ -141,7 +141,7 @@ ggsave("images/volcano_plots/volcano_plot_family.png", plot = volcano_plot_famil
 ###### ORDER ######
 ###################
 
-DAA_order <- read.csv("MaAsLin2_results/order/all_results.tsv", sep = "")
+DAA_order <- read.csv("MaAsLin2_results/order/all_results.tsv", sep = "\t")
 
 DAA_order$diffabund <- "NO"
 DAA_order$diffabund[DAA_order$coef > 1 & DAA_order$qval < 0.05 & DAA_order$metadata == "Group"] <- "NN_plus"
@@ -184,7 +184,7 @@ ggsave("images/volcano_plots/volcano_plot_order.png", plot = volcano_plot_order,
 ###### CLASS ######
 ###################
 
-DAA_class <- read.csv("MaAsLin2_results/class/all_results.tsv", sep = "")
+DAA_class <- read.csv("MaAsLin2_results/class/all_results.tsv", sep = "\t")
 
 DAA_class$diffabund <- "NO"
 DAA_class$diffabund[DAA_class$coef > 1 & DAA_class$qval < 0.05 & DAA_class$metadata == "Group"] <- "NN_plus"
@@ -228,7 +228,7 @@ ggsave("images/volcano_plots/volcano_plot_class.png", plot = volcano_plot_class,
 ###### PHYLUM ######
 ####################
 
-DAA_phylum <- read.csv("MaAsLin2_results/phylum/all_results.tsv", sep = "")
+DAA_phylum <- read.csv("MaAsLin2_results/phylum/all_results.tsv", sep = "\t")
 
 DAA_phylum$diffabund <- "NO"
 DAA_phylum$diffabund[DAA_phylum$coef > 1 & DAA_phylum$qval < 0.05 & DAA_phylum$metadata == "Group"] <- "NN_plus"
