@@ -5,7 +5,7 @@ if (!require("pacman")) install.packages("pacman")
 
 pacman::p_load(tidyverse, ggtext, ggrepel)
 
-DAA_pathways <- read.csv("MaAsLin2_on_HUMAnN3_results/all_results.tsv", sep = "")
+DAA_pathways <- read.csv("MaAsLin2_on_HUMAnN3_results/all_results.tsv", sep = "\t")
 
 DAA_pathways$diffabund <- "NO"
 DAA_pathways$diffabund[DAA_pathways$coef > 1 & DAA_pathways$qval < 0.05 & DAA_pathways$metadata == "Group"] <- "NN_plus"
