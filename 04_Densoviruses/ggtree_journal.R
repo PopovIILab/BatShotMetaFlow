@@ -349,7 +349,7 @@ All <- ggtree(All_tree) %<+% metadata +
     offset = 1.5,
     align = TRUE
   ) +
-  xlim(0, 4.7) +
+  xlim(0, 4.5) +
   geom_tiplab(
     aes(label = Full.Name),
     color = "black",
