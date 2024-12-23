@@ -7,7 +7,7 @@ rule all:
 rule run_prokka:
     input:
         genome = "viral_genomes/Densovirus_{sample}.fasta",
-        proteins = "genbank_seqs/densoviruses_proteins2.fa"
+        proteins = "genbank_seqs/densoviruses_proteins.fa"
     params:
         prefix = "Densovirus_{sample}_annot"
     threads:
