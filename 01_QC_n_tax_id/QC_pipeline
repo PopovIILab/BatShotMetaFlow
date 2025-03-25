@@ -2,7 +2,7 @@ SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
 
 rule all:
     input:
-        expand("multiqc_reports/{sample}", sample=SAMPLES)
+        expand("multiqc_reports/comdined")
 
 rule run_fastqc:
     input:
@@ -22,6 +22,17 @@ rule run_multiqc:
         rules.run_fastqc.output
     output:
         directory("multiqc_reports/{sample}")
+    conda: "qc_n_tax_id"
+    shell:
+        """
+        multiqc {input} -o {output}
+        """
+
+rule run_ultraqc:
+    input:
+        "fastqc_reports/"
+    output:
+        directory("multiqc_reports/comdined")
     conda: "qc_n_tax_id"
     shell:
         """
