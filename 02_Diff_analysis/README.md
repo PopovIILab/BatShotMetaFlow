@@ -8,14 +8,10 @@
 - 📑 [`02_Lab_journal.ipynb`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/02_Lab_journal.ipynb) - laboratory journal with commands to reproduce pipeline
 - 📁 [`scripts`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/scripts) - folder with miscellaneous scripts used for data analysis:
   - 📝 [`rename_files.py`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/scripts/rename_files.py) - script to delete `_kraken_report` files name for convenient data parsing further
-  - 📝 [`run_kreport2mpa.sh`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/scripts/run_kreport2mpa.sh) - script to wrap `KrakenTools` function `kreport2mpa` into the cycle to run it on all files in one touch
-  - 📝 [`processing_script.py`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/scripts/processing_script.py) - script to return the 1st row from [`COMBINED.txt`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/data/COMBINED.txt) file to [`counts.txt`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/counts/txt) files & to delete '[X]__' and '_' from organisms names
-  - 📝 [`convert2csv.py`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/scripts/convert2csv.py) - script to convert [`counts.txt`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/counts/txt) files to [`counts.csv`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/counts/csv) format
   - 📝 [`MaAsLin2.R`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/scripts/MaAsLin2.R) - script to run `MaAsLin2`
   - 📝 [`Alpha_div_calculations.R`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/02_Diff_analysis/scripts/Alpha_div_calculations.R) - script to calculate α-diversity
-- 📑 [`Volcano_plots_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/Volcano_plots_journal.R) - laboratory journal to plot `MaAsLin2` results as a `volcano-plot`
-- 📑 [`Bar_plots_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/Bar_plots_journal.R) - laboratory journal to plot `bar-plots` with relative microbial abundance
-- 📑 [`Alpha_Beta_div_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/Alpha_Beta_div_journal.R) - laboratory journal to plot α-diversity metrics as `box-plot`s and β-diversity metrics as `PCoA` plots
+- 📑 [`Volcano_plots_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/Volcano_plots_journal.R) - laboratory journal to plot `MaAsLin2` results as `volcano-plots`
+- 📑 [`RA_n_Diversity_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/RA_n_Diversity_journal.R) - laboratory journal to plot `bar-plots` with relative microbial abundance; α-diversity metrics as `box-plot`s and β-diversity metrics as `PCoA` plots
 - 📑 [`diff_an.yaml`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/diff_an.yaml) - conda environment
 
 **Instruction**:

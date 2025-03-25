@@ -7,10 +7,6 @@
 **Files**:
 - 📑 [`03_Lab_journal.ipynb`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/03_Lab_journal.ipynb) - laboratory journal with commands to reproduce pipeline
 - ⚙️ [`Assembly_pipeline`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/Assembly_pipeline) - `snakemake` pipeline to run `metaSPAdes` & `metaquast`
-- 📁 [`metaquast_reports`](https://github.com/PopovIILab/BatShotMetaFlow/tree/main/03_Metagenomes/metaquast_reports) - folder with `metaquast` reports:
-  - 📁 `{sample}` - reports are stored in folders by samples (D1-5; P1-P5):
-    - 📑 `icarus.html` - `icarus` `metaquast` report
-    - 📑 `report.html` - main `metaquast` report
 - ⚙️ [`Filtering_pipeline`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/Filtering_pipeline) - `snakemake` pipeline to filter out short sequences from MAGs using [`scripts/filter_MAGs.py`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/filter_MAGs.py) script
 - ⚙️ [`HUMAnN3_pipeline`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/HUMAnN3_pipeline) - `snakemake` pipeline to run `HUMAnN3` on every filtered MAG
 - 📁 [`scripts`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts) - folder with miscellaneous scripts used for data analysis:
@@ -20,6 +16,10 @@
   - 📝 [`filt_humann3.py`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/filt_humann3.py) - script to filter out redundant info from `HUMAnN3` outputs
   - 📝 [`transpose_humann.py`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/transpose_humann.py) - script to transpose `HUMAnN3` output & prepare it for input in `MaAsLin2`
   - 📝 [`MaAsLin2.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/scripts/MaAsLin2.R) - script to run `MaAsLin2` on `HUMAnN3` results (it purposely does not uses any normalization method)
+  - 📑 [`ABRicate_visualization_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/ABRicate_visualization_journal.R) - laboratory journal to plot `ABRicate` results as `bar-plot` and `heatmaps`
+- 📑 [`HUMAnN3_heatmaps_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/HUMAnN3_heatmaps_journal.R) - laboratory journal to plot `HUMAnN3` results as `heatmap` (pathway abundance table only)
+- 📑 [`HUMAnN3_volcano_plot_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/HUMAnN3_volcano_plot_journal.R) - laboratory journal to plot `MaAsLin2` on `HUMAnN3` results as `volcano-plots`
+- 📑 [`metagenomes.yaml`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/metagenomes.yaml) - conda environment
 
 **Instruction**:
 - Create new environment `metagenomes`
