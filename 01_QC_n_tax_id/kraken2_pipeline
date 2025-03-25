@@ -2,8 +2,8 @@ SAMPLES = ["D1", "D2", "D3", "D4", "D5", "P1", "P2", "P3", "P4", "P5"]
 
 rule all:
     input:
-        expand("kraken2_reports/{sample}/{sample}_kraken_output.txt", sample=SAMPLES),
-        expand("kraken2_reports/{sample}/{sample}_kraken_report.txt", sample=SAMPLES)
+        expand("bracken_reports/{sample}.bracken", sample=SAMPLES),
+        expand("kraken2_bracken/{sample}_kraken_report.txt", sample=SAMPLES)
 
 rule run_kraken2:
     input:
@@ -13,11 +13,25 @@ rule run_kraken2:
         output_txt="kraken2_reports/{sample}/{sample}_kraken_output.txt",
         report_txt="kraken2_reports/{sample}/{sample}_kraken_report.txt"
     params:
-        db="~/PlusPF"
+        db="~/PlusPF_2024_dec28"
     threads:
         24
     conda: "qc_n_tax_id"
     shell:
         """
         kraken2 --db {params.db} --paired {input.r1} {input.r2} --output {output.output_txt} --report {output.report_txt} --threads {threads}
+        """
+
+rule run_bracken:
+    input:
+        "kraken2_reports/{sample}/{sample}_kraken_report.txt"
+    output:
+        bracken="bracken_reports/{sample}.bracken",
+        kraken2_bracken="kraken2_bracken/{sample}_kraken_report.txt"
+    params:
+        db="~/PlusPF_2024_dec28"
+    conda: "qc_n_tax_id"
+    shell:
+        """
+        bracken -d {params.db} -i {input} -o {output.bracken} -w {output.kraken2_bracken}
         """
