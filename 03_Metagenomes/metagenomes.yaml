@@ -335,6 +335,7 @@ dependencies:
       - ipython==8.26.0
       - jedi==0.19.1
       - jupyter-client==8.6.2
+      - kegganog==0.7.42
       - matplotlib-inline==0.1.7
       - nest-asyncio==1.6.0
       - parso==0.8.4
