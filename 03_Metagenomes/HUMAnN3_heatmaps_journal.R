@@ -40,12 +40,12 @@ heatmap <- ggplot(df_heatmap_long, aes(x = Sample, y = Pathway, fill = Abundance
   scale_fill_gradientn(
     colors = c(
       "white",
-      "#D8BFD8",
-      "purple",
-      "#4B0082",
-      "lightgreen",
-      "green",
-      "darkgreen"
+      "#1BB6AFFF",
+      "#088BBEFF",
+      "#172869FF",
+      "#F4B95AFF",
+      "#FCA315FF",
+      "#EF7C12FF"
     ),
     name = "Relative abundance"
   ) +
@@ -60,7 +60,7 @@ heatmap <- ggplot(df_heatmap_long, aes(x = Sample, y = Pathway, fill = Abundance
   )
 
 ggsave(
-  "images/HUMAnN3_heatmap/heatmap_pathabundance.png",
+  "images/RA_HUMAnN3.png",
   plot = heatmap,
   width = 12,
   height = 10,
