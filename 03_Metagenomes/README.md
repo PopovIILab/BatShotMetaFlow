@@ -19,7 +19,7 @@
   - 📑 [`ABRicate_visualization_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/ABRicate_visualization_journal.R) - laboratory journal to plot `ABRicate` results as `bar-plot` and `heatmaps`
 - 📑 [`HUMAnN3_heatmaps_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/HUMAnN3_heatmaps_journal.R) - laboratory journal to plot `HUMAnN3` results as `heatmap` (pathway abundance table only)
 - 📑 [`HUMAnN3_volcano_plot_journal.R`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/HUMAnN3_volcano_plot_journal.R) - laboratory journal to plot `MaAsLin2` on `HUMAnN3` results as `volcano-plots`
-- 📑 [`metagenomes.yaml`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/02_Diff_analysis/metagenomes.yaml) - conda environment
+- 📑 [`metagenomes.yaml`](https://github.com/PopovIILab/BatShotMetaFlow/blob/main/03_Metagenomes/metagenomes.yaml) - conda environment
 
 **Instruction**:
 - Create new environment `metagenomes`
