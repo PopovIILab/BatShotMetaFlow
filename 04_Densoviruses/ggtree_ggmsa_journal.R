@@ -488,7 +488,7 @@ womdo_combo <- (combined_trees / p1 / p2) +
   plot_annotation(tag_levels = "A")
 
 ggsave(
-  "images/womdo_combo.png",
+  "images/womdo_combo_phylogeny.png",
   plot = womdo_combo,
   width = 28,
   height = 22,
