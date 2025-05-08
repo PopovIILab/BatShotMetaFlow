@@ -4,7 +4,7 @@ setwd(main_dir)
 if (!require("pacman"))
   install.packages("pacman")
 
-pacman::p_load(tidyverse, reshape2, patchwork, ggtext)
+pacman::p_load(tidyverse, reshape2, patchwork, ggtext, ggVennDiagram)
 
 df_bar_plot <- read.csv("ABRicate_results/summary/tsv/merged_summary.tsv", sep = "\t") %>%
   filter(SAMPLE != "D4") %>%
@@ -167,6 +167,9 @@ df_resfinder_long <- melt(
 ) %>%
   filter(ARG != "NUM FOUND")
 
+df_resfinder_long <- df_resfinder_long %>%
+  mutate(ARG = word(ARG, 1))
+
 heatmap_resfinder <- ggplot(df_resfinder_long, aes(x = SAMPLE, y = ARG, fill = presence)) +
   geom_tile(color = "black",
             linewidth = 0.25,
@@ -311,6 +314,10 @@ ggsave(
   dpi = 600
 )
 
+###############
+# Wombo Combo #
+###############
+
 wombo <- (barplot / (heatmap_card + heatmap_resfinder)) +
   plot_layout(heights = c(3, 14))
 
@@ -323,5 +330,75 @@ ggsave(
   plot = wombo_combo,
   width = 22,
   height = 17,
+  dpi = 600
+)
+
+################
+# Venn Diagram #
+################
+
+set_A <- paste0("A", 1:121)
+set_B <- c(paste0("A", 1:32), paste0("B", 1:21))
+
+venn_list <- list(CARD = set_A, ResFinder = set_B)
+
+venn <- Venn(venn_list)
+data <- process_data(venn, shape_id = "201")
+
+region_labels <- venn_regionlabel(data)
+
+custom_colors <- c("1" = "#8DA0CB", "2" = "#FC8D62", "3" = "#BF9FB0")
+
+venn_diag <- ggplot() +
+  geom_polygon(
+    data = venn_regionedge(data),
+    aes(X, Y, group = id, fill = id),
+    color = "black",
+    linewidth = 1.2,
+    show.legend = FALSE
+  ) +
+  geom_path(
+    data = venn_setedge(data),
+    aes(X, Y, group = id),
+    color = "black",
+    linewidth = 1.2,
+    show.legend = FALSE
+  ) +
+  geom_label(
+    data = venn_regionlabel(data),
+    aes(X, Y, label = count),
+    size = 4
+  ) +
+  scale_fill_manual(values = custom_colors) +
+  coord_equal() +
+  theme_void()
+
+ggsave(
+  "images/venn_diag.png",
+  plot = venn_diag,
+  width = 11,
+  height = 3,
+  dpi = 600
+)
+
+#####################
+# Wombo Ultra Combo #
+#####################
+
+resfinder_venn <- (heatmap_resfinder / venn_diag) +
+  plot_layout(heights = c(11, 3))
+
+wombo_ultra <- (free(barplot, type = "label") / (heatmap_card + resfinder_venn)) +
+  plot_layout(heights = c(3, 14))
+
+wombo_ultra_combo <- (wombo_ultra | VFDB_combined) +
+  plot_layout(heights = c(20)) +
+  plot_annotation(tag_levels = list(c('A', 'B', 'C', 'D', 'E')))
+
+ggsave(
+  "images/ABRicate_wombo_ultra_combo.png",
+  plot = wombo_ultra_combo,
+  width = 22,
+  height = 20,
   dpi = 600
 )
