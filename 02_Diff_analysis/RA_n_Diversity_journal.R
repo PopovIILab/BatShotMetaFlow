@@ -19,6 +19,8 @@ pacman::p_load(
   glue
 )
 
+set.seed(42)
+
 #################################
 ##########Taxa_bar_plots#########
 #################################
@@ -637,6 +639,7 @@ chao1 <- Alpha %>%
     axis.line = element_line(colour = "black")
   ) +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
+  scale_y_continuous(labels = scales::label_comma()) +
   scale_fill_manual(name = "Bat species", values = c("#0000FF", "#FF0000")) +
   theme(
     axis.text.x = element_blank(),
@@ -717,6 +720,20 @@ taxon_counts <- read.table(
   row.names = 1
 )
 
+# custom labeller for Unicode minus
+minus_label <- function(x) {
+  vapply(x, function(i) {
+    if (is.na(i)) {
+      # drop NA ticks: return blank or NA_character_
+      return(NA_character_)
+    } else if (i < 0) {
+      paste0("\u2212", format(abs(i), nsmall = 1))
+    } else {
+      format(i, nsmall = 1)
+    }
+  }, FUN.VALUE = character(1))
+}
+
 ##################
 ###### Bray ######
 ##################
@@ -736,7 +753,6 @@ bray_dist_matrix <- bray %>%
   dplyr::select(-sample_id) %>%
   as.dist()
 
-set.seed(42)
 adonis2(as.dist(bray_dist_matrix) ~ metadata_beta$status, method = "bray")
 
 pcoa_bray <- cmdscale(bray_dist_matrix, eig = TRUE, add = TRUE)
@@ -769,6 +785,8 @@ PCOA_bray_plot <- positions_bray %>%
       alpha("gray", 0.5)
     )
   ) +
+  scale_x_continuous(labels = minus_label) +
+  scale_y_continuous(labels = minus_label) +
   guides(color = guide_legend(
     override.aes = list(shape = 15, size = 4, alpha = 1)
   )) +
@@ -807,7 +825,6 @@ jaccard_dist_matrix <- jaccard %>%
   dplyr::select(-sample_id) %>%
   as.dist()
 
-set.seed(42)
 adonis2(as.dist(jaccard_dist_matrix) ~ metadata_beta$status, method = "jaccard")
 
 pcoa_jaccard <- cmdscale(jaccard_dist_matrix, eig = TRUE, add = TRUE)
@@ -826,6 +843,8 @@ labels_jaccard <- c(
   glue("PCo Axis 2 ({pretty_pe_jaccard[2]}%)")
 )
 
+positions_jaccard[, 2] <- -positions_jaccard[, 2]
+
 PCOA_jaccard_plot <- positions_jaccard %>%
   as_tibble(rownames = "sample_id") %>%
   dplyr::inner_join(., metadata_beta, by = "sample_id") %>%
@@ -842,6 +861,8 @@ PCOA_jaccard_plot <- positions_jaccard %>%
       alpha("gray", 0.5)
     )
   ) +
+  scale_x_continuous(labels = minus_label) +
+  scale_y_continuous(labels = minus_label) +
   guides(color = guide_legend(
     override.aes = list(shape = 15, size = 4, alpha = 1)
   )) +
