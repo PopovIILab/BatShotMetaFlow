@@ -1,0 +1,22 @@
+name: Test conda envs
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    strategy:
+      matrix:
+        include:
+          - env: qc_n_tax_id.yaml
+            path: 01_QC_n_tax_id
+          - env: diff_an.yaml
+            path: 02_Diff_analysis
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v4
+        with:
+          miniforge-version: latest
+          activate-environment: test
+      - run: mamba env create -f ${{ matrix.path }}/${{ matrix.env }} --dry-run
