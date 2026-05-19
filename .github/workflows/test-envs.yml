@@ -19,4 +19,4 @@ jobs:
         with:
           miniforge-version: latest
           activate-environment: test
-      - run: mamba env create -f ${{ matrix.path }}/${{ matrix.env }} --dry-run
+      - run: conda env create -f ${{ matrix.path }}/${{ matrix.env }} --dry-run
