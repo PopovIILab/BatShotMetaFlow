@@ -1,6 +1,7 @@
 import sys
-import os
+
 from Bio import SeqIO
+
 
 def extract_longest_sequence(blast_output, metagenome_file, output_file):
     longest_alignment_length = 0
@@ -29,9 +30,12 @@ def extract_longest_sequence(blast_output, metagenome_file, output_file):
 
     print(f"Best match ID {best_match_id} not found in the metagenome file.")
 
+
 def main():
     if len(sys.argv) != 4:
-        print("Usage: python extract_seqs.py <metagenome_file> <blast_output> <output_file>")
+        print(
+            "Usage: python extract_seqs.py <metagenome_file> <blast_output> <output_file>"
+        )
         sys.exit(1)
 
     metagenome_file = sys.argv[1]
@@ -39,6 +43,7 @@ def main():
     output_file = sys.argv[3]
 
     extract_longest_sequence(blast_output, metagenome_file, output_file)
+
 
 if __name__ == "__main__":
     main()
