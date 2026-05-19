@@ -8,6 +8,6 @@ dependencies:
   - snakemake=9.1.1
   - fastqc=0.12.1
   - multiqc=1.28
-  - kraken2=2.14
+  - kraken2=2.1.5
   - bracken=1.0.0
   - ipykernel=6.29.5
