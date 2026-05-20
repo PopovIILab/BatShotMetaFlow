@@ -1,4 +1,5 @@
 # Bat Shotgun Metagenomic Flow-work
+[![CI](https://github.com/PopovIILab/BatShotMetaFlow/actions/workflows/test-envs.yml/badge.svg)](https://github.com/PopovIILab/BatShotMetaFlow/actions/workflows/test-envs.yml)
 
 The data analysis of shotgun metagenomic data from bats fecal samples was so complex that there are 4 different parts of it!<br>
 See lab journals and some supplementary files in directories:
