@@ -14,7 +14,7 @@ rule run_prokka:
         24
     output:
         directory("prokka_results/annotated_densovirus_{sample}")
-    conda: "denso.yaml"
+    conda: "denso"
     shell:
         """
         prokka --kingdom Viruses --outdir {output} --proteins {input.proteins} --addgenes --prefix {params.prefix} {input.genome} --cpus {threads}
