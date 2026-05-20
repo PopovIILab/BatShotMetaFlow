@@ -11,7 +11,7 @@ rule run_filtering:
         "filtered_MAGs/{sample}_filtered.fasta"
     params:
         threshold=3500
-    conda: "mags.yaml"
+    conda: "metagenomes"
     shell:
         """
         python scripts/filter_MAGs.py {input} {output} {params.threshold}

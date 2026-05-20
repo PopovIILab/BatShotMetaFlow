@@ -17,7 +17,7 @@ rule run_emapper:
         db="/home/user/eggNOG-mapper_DB"
     threads:
         0
-    conda: "mags"
+    conda: "metagenomes"
     shell:
         """
         mkdir -p eggNOG/{wildcards.sample}
