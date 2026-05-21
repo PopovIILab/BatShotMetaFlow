@@ -1,13 +1,16 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-if (!require("pacman"))
+if (!require("pacman")) {
   install.packages("pacman")
+}
 
 pacman::p_load(tidyverse, reshape2, ggtext)
 
-df_heatmap <- read.csv("HUMAnN3_results/pathabundance_filtered_normalized.tsv",
-                       sep = "\t")
+df_heatmap <- read.csv(
+  "HUMAnN3_results/pathabundance_filtered_normalized.tsv",
+  sep = "\t"
+)
 
 df_heatmap_long <- melt(
   df_heatmap,
@@ -28,14 +31,18 @@ df_heatmap_long <- melt(
   ) %>%
   mutate(
     Pathway = case_when(
-      Pathway == "PWY4LZ-257: superpathway of fermentation (Chlamydomonas reinhardtii)" ~
+      Pathway ==
+        "PWY4LZ-257: superpathway of fermentation (Chlamydomonas reinhardtii)" ~
         "PWY4LZ-257: superpathway of fermentation (*Chlamydomonas reinhardtii*)",
       TRUE ~ Pathway
     )
   ) %>%
   filter(!Sample %in% c("NN3", "VM3"))
 
-heatmap <- ggplot(df_heatmap_long, aes(x = Sample, y = Pathway, fill = Abundance)) +
+heatmap <- ggplot(
+  df_heatmap_long,
+  aes(x = Sample, y = Pathway, fill = Abundance)
+) +
   geom_tile(color = "black", linewidth = 0.25) +
   scale_fill_gradientn(
     colors = c(

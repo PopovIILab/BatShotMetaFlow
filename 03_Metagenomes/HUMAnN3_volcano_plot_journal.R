@@ -1,42 +1,69 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-if (!require("pacman"))
+if (!require("pacman")) {
   install.packages("pacman")
+}
 
 pacman::p_load(tidyverse, ggtext, ggrepel)
 
-DAA_pathways <- read.csv("MaAsLin2_on_HUMAnN3_results/all_results.tsv", sep = "\t")
+DAA_pathways <- read.csv(
+  "MaAsLin2_on_HUMAnN3_results/all_results.tsv",
+  sep = "\t"
+)
 
 DAA_pathways$diffabund <- "NO"
-DAA_pathways$diffabund[DAA_pathways$coef > 1 &
-                         DAA_pathways$qval < 0.05 &
-                         DAA_pathways$metadata == "Group"] <- "NN_plus"
-DAA_pathways$diffabund[DAA_pathways$coef < -1 &
-                         DAA_pathways$qval < 0.05 &
-                         DAA_pathways$metadata == "Group"] <- "NN_minus"
-DAA_pathways$feature[DAA_pathways$diffabund == "NO"] <- NA
-DAA_pathways$label <- NA
-top_red <- DAA_pathways[DAA_pathways$coef < -1 &
-                          DAA_pathways$qval < 0.05 & DAA_pathways$metadata == "Group", ]
-top_red <- top_red[order(top_red$qval), ][1:5, ]
-DAA_pathways$label[DAA_pathways$feature %in% top_red$feature] <- DAA_pathways$feature[DAA_pathways$feature %in% top_red$feature]
-DAA_pathways$label[DAA_pathways$coef > 1 &
-                     DAA_pathways$qval < 0.05 &
-                     DAA_pathways$metadata == "Group"] <- DAA_pathways$feature[DAA_pathways$coef > 1 &
-                                                                                 DAA_pathways$qval < 0.05 & DAA_pathways$metadata == "Group"]
 
-volcano_plot <- ggplot(data = DAA_pathways, aes(
-  x = coef,
-  y = -log10(qval),
-  label = feature,
-  col = diffabund
-)) +
+DAA_pathways$diffabund[
+  DAA_pathways$coef > 1 &
+    DAA_pathways$qval < 0.05 &
+    DAA_pathways$metadata == "Group"
+] <- "NN_plus"
+
+DAA_pathways$diffabund[
+  DAA_pathways$coef < -1 &
+    DAA_pathways$qval < 0.05 &
+    DAA_pathways$metadata == "Group"
+] <- "NN_minus"
+
+DAA_pathways$feature[DAA_pathways$diffabund == "NO"] <- NA
+
+DAA_pathways$label <- NA
+
+top_red <- DAA_pathways[
+  DAA_pathways$coef < -1 &
+    DAA_pathways$qval < 0.05 &
+    DAA_pathways$metadata == "Group",
+]
+
+top_red <- top_red[order(top_red$qval), ][1:5, ]
+
+DAA_pathways$label[
+  DAA_pathways$feature %in% top_red$feature
+] <- DAA_pathways$feature[DAA_pathways$feature %in% top_red$feature]
+
+DAA_pathways$label[
+  DAA_pathways$coef > 1 &
+    DAA_pathways$qval < 0.05 &
+    DAA_pathways$metadata == "Group"
+] <- DAA_pathways$feature[
+  DAA_pathways$coef > 1 &
+    DAA_pathways$qval < 0.05 &
+    DAA_pathways$metadata == "Group"
+]
+
+volcano_plot <- ggplot(
+  data = DAA_pathways,
+  aes(
+    x = coef,
+    y = -log10(qval),
+    label = feature,
+    col = diffabund
+  )
+) +
   geom_point(size = 2) +
   theme_bw() +
-  geom_vline(xintercept = c(-1, 1),
-             col = "gray",
-             linetype = 'dashed') +
+  geom_vline(xintercept = c(-1, 1), col = "gray", linetype = 'dashed') +
   geom_hline(
     yintercept = c(-log10(0.05)),
     col = "gray",

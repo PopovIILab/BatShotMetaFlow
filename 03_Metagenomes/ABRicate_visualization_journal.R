@@ -1,12 +1,16 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-if (!require("pacman"))
+if (!require("pacman")) {
   install.packages("pacman")
+}
 
 pacman::p_load(tidyverse, reshape2, patchwork, ggtext, ggVennDiagram)
 
-df_bar_plot <- read.csv("ABRicate_results/summary/tsv/merged_summary.tsv", sep = "\t") %>%
+df_bar_plot <- read.csv(
+  "ABRicate_results/summary/tsv/merged_summary.tsv",
+  sep = "\t"
+) %>%
   filter(SAMPLE != "D4") %>%
   mutate(
     SAMPLE = str_replace(SAMPLE, "D1", "VM1"),
@@ -35,9 +39,14 @@ barplot <- df_bar_plot_long %>%
     color = "gray"
   ) +
   geom_vline(
-    xintercept = seq(1.5, length(unique(
-      df_bar_plot_long$SAMPLE
-    )) - 0.5, by = 1),
+    xintercept = seq(
+      1.5,
+      length(unique(
+        df_bar_plot_long$SAMPLE
+      )) -
+        0.5,
+      by = 1
+    ),
     linetype = "dashed",
     color = "black"
   ) +
@@ -54,8 +63,10 @@ barplot <- df_bar_plot_long %>%
     labels = c("CARD", "ResFinder", "VFDB"),
     values = c("#8DA0CB", '#FC8D62', "#66C2A5")
   ) +
-  theme(legend.title = element_text(size = 14),
-        legend.text = element_text(size = 14)) +
+  theme(
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 14)
+  ) +
   geom_text(
     aes(label = number),
     position = position_dodge(width = 0.9),
@@ -114,14 +125,17 @@ df_card_long <- melt(
 ) %>%
   filter(ARG != "NUM FOUND")
 
-heatmap_card <- ggplot(df_card_long, aes(x = SAMPLE, y = ARG, fill = presence)) +
-  geom_tile(color = "black",
-            linewidth = 0.25,
-            show.legend = FALSE) +
-  scale_fill_manual(#name = "ARG presence",
+heatmap_card <- ggplot(
+  df_card_long,
+  aes(x = SAMPLE, y = ARG, fill = presence)
+) +
+  geom_tile(color = "black", linewidth = 0.25, show.legend = FALSE) +
+  scale_fill_manual(
+    #name = "ARG presence",
     breaks = c("plus", "minus"),
     #labels = c("Present", "Absent"),
-    values = c("#8DA0CB", "white")) +
+    values = c("#8DA0CB", "white")
+  ) +
   theme_classic() +
   labs(x = NULL, y = NULL) +
   theme(axis.line = element_blank(), axis.text = element_markdown())
@@ -170,14 +184,17 @@ df_resfinder_long <- melt(
 df_resfinder_long <- df_resfinder_long %>%
   mutate(ARG = word(ARG, 1))
 
-heatmap_resfinder <- ggplot(df_resfinder_long, aes(x = SAMPLE, y = ARG, fill = presence)) +
-  geom_tile(color = "black",
-            linewidth = 0.25,
-            show.legend = FALSE) +
-  scale_fill_manual(#name = "ARG presence",
+heatmap_resfinder <- ggplot(
+  df_resfinder_long,
+  aes(x = SAMPLE, y = ARG, fill = presence)
+) +
+  geom_tile(color = "black", linewidth = 0.25, show.legend = FALSE) +
+  scale_fill_manual(
+    #name = "ARG presence",
     breaks = c("plus", "minus"),
     #labels = c("Present", "Absent"),
-    values = c("#FC8D62", "white")) +
+    values = c("#FC8D62", "white")
+  ) +
   theme_classic() +
   labs(x = NULL, y = NULL) +
   theme(axis.line = element_blank(), axis.text = element_markdown())
@@ -232,8 +249,18 @@ n_col_part3 <- 104
 
 # Split the dataframe into three parts
 df_vfdb_part1 <- cbind(SAMPLE, df_vfdb_no_sample[, 1:n_col_part1])
-df_vfdb_part2 <- cbind(SAMPLE, df_vfdb_no_sample[, (n_col_part1 + 1):(n_col_part1 + n_col_part2)])
-df_vfdb_part3 <- cbind(SAMPLE, df_vfdb_no_sample[, (n_col_part1 + n_col_part2 + 1):(n_col_part1 + n_col_part2 + n_col_part3)])
+
+df_vfdb_part2 <- cbind(
+  SAMPLE,
+  df_vfdb_no_sample[, (n_col_part1 + 1):(n_col_part1 + n_col_part2)]
+)
+
+df_vfdb_part3 <- cbind(
+  SAMPLE,
+  df_vfdb_no_sample[,
+    (n_col_part1 + n_col_part2 + 1):(n_col_part1 + n_col_part2 + n_col_part3)
+  ]
+)
 
 # VFDB: PART 1 #
 
@@ -244,14 +271,17 @@ df_vfdb_part1_long <- melt(
   value.name = "presence"
 )
 
-heatmap_vfdb_part1 <- ggplot(df_vfdb_part1_long, aes(x = SAMPLE, y = ARG, fill = presence)) +
-  geom_tile(color = "black",
-            linewidth = 0.25,
-            show.legend = FALSE) +
-  scale_fill_manual(#name = "ARG presence",
+heatmap_vfdb_part1 <- ggplot(
+  df_vfdb_part1_long,
+  aes(x = SAMPLE, y = ARG, fill = presence)
+) +
+  geom_tile(color = "black", linewidth = 0.25, show.legend = FALSE) +
+  scale_fill_manual(
+    #name = "ARG presence",
     breaks = c("plus", "minus"),
     #labels = c("Present", "Absent"),
-    values = c("#66C2A5", "white")) +
+    values = c("#66C2A5", "white")
+  ) +
   theme_classic() +
   labs(x = NULL, y = NULL) +
   theme(axis.line = element_blank(), axis.text = element_markdown())
@@ -266,14 +296,17 @@ df_vfdb_part2_long <- melt(
   value.name = "presence"
 )
 
-heatmap_vfdb_part2 <- ggplot(df_vfdb_part2_long, aes(x = SAMPLE, y = ARG, fill = presence)) +
-  geom_tile(color = "black",
-            linewidth = 0.25,
-            show.legend = FALSE) +
-  scale_fill_manual(#name = "ARG presence",
+heatmap_vfdb_part2 <- ggplot(
+  df_vfdb_part2_long,
+  aes(x = SAMPLE, y = ARG, fill = presence)
+) +
+  geom_tile(color = "black", linewidth = 0.25, show.legend = FALSE) +
+  scale_fill_manual(
+    #name = "ARG presence",
     breaks = c("plus", "minus"),
     #labels = c("Present", "Absent"),
-    values = c("#66C2A5", "white")) +
+    values = c("#66C2A5", "white")
+  ) +
   theme_classic() +
   labs(x = NULL, y = NULL) +
   theme(axis.line = element_blank(), axis.text = element_markdown())
@@ -288,14 +321,17 @@ df_vfdb_part3_long <- melt(
   value.name = "presence"
 )
 
-heatmap_vfdb_part3 <- ggplot(df_vfdb_part3_long, aes(x = SAMPLE, y = ARG, fill = presence)) +
-  geom_tile(color = "black",
-            linewidth = 0.25,
-            show.legend = FALSE) +
-  scale_fill_manual(#name = "ARG presence",
+heatmap_vfdb_part3 <- ggplot(
+  df_vfdb_part3_long,
+  aes(x = SAMPLE, y = ARG, fill = presence)
+) +
+  geom_tile(color = "black", linewidth = 0.25, show.legend = FALSE) +
+  scale_fill_manual(
+    #name = "ARG presence",
     breaks = c("plus", "minus"),
     #labels = c("Present", "Absent"),
-    values = c("#66C2A5", "white")) +
+    values = c("#66C2A5", "white")
+  ) +
   theme_classic() +
   labs(x = NULL, y = NULL) +
   theme(axis.line = element_blank(), axis.text = element_markdown())
@@ -303,7 +339,9 @@ heatmap_vfdb_part3 <- ggplot(df_vfdb_part3_long, aes(x = SAMPLE, y = ARG, fill =
 
 # VFDB: ALLTOGETHER #
 
-VFDB_combined <- heatmap_vfdb_part1 + heatmap_vfdb_part2 + heatmap_vfdb_part3 &
+VFDB_combined <- heatmap_vfdb_part1 +
+  heatmap_vfdb_part2 +
+  heatmap_vfdb_part3 &
   plot_annotation(tag_levels = list(c("A", "B", "C")))
 
 ggsave(
@@ -388,7 +426,8 @@ ggsave(
 resfinder_venn <- (heatmap_resfinder / venn_diag) +
   plot_layout(heights = c(11, 3))
 
-wombo_ultra <- (free(barplot, type = "label") / (heatmap_card + resfinder_venn)) +
+wombo_ultra <- (free(barplot, type = "label") /
+  (heatmap_card + resfinder_venn)) +
   plot_layout(heights = c(3, 14))
 
 wombo_ultra_combo <- (wombo_ultra | VFDB_combined) +

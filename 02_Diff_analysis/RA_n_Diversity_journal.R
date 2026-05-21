@@ -1,8 +1,9 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-if (!require("pacman"))
+if (!require("pacman")) {
   install.packages("pacman")
+}
 
 pacman::p_load(
   tidyverse,
@@ -31,20 +32,33 @@ metadata <- read.csv("metadata.csv")
 ###### SPECIES ######
 #####################
 
-data_species <- read.csv("data/counts/csv/counts_species_new.csv", check.names = F)
-merged_data_species <- merge(data_species, metadata, by.x = "Sample_id", by.y = "sample_id")
+data_species <- read.csv(
+  "data/counts/csv/counts_species_new.csv",
+  check.names = F
+)
+merged_data_species <- merge(
+  data_species,
+  metadata,
+  by.x = "Sample_id",
+  by.y = "sample_id"
+)
 long_data_species <- pivot_longer(
   merged_data_species,
   cols = -c(Sample_id, Group),
   names_to = "taxon",
   values_to = "abundance"
 )
-long_data_species <- select(long_data_species, Sample_id, Group, taxon, abundance)
+long_data_species <- select(
+  long_data_species,
+  Sample_id,
+  Group,
+  taxon,
+  abundance
+)
 
 summarized_data_species <- long_data_species %>%
   group_by(Sample_id, taxon) %>%
-  summarize(total_abundance = sum(abundance, na.rm = TRUE),
-            .groups = 'drop')
+  summarize(total_abundance = sum(abundance, na.rm = TRUE), .groups = 'drop')
 
 
 # Preprocess data to calculate percentages and filter based on conditions
@@ -54,27 +68,45 @@ data_species_1 <- summarized_data_species %>%
   ungroup() %>%
   mutate(percentage = (total_abundance / total_abundance_group) * 100) %>%
   #filter(!(Group == "positive" & total_abundance < 1)) %>%
-  mutate(taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))) %>%
+  mutate(
+    taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))
+  ) %>%
   group_by(Sample_id, taxon) %>%
   summarize(total_percentage = sum(percentage), .groups = 'drop') %>%
   arrange(Sample_id, desc(total_percentage))
 
-data_species_1$taxon <- factor(data_species_1$taxon, levels = c("Other (< 3%)", unique(data_species_1$taxon[data_species_1$taxon != "Other (< 3%)"])))
+data_species_1$taxon <- factor(
+  data_species_1$taxon,
+  levels = c(
+    "Other (< 3%)",
+    unique(data_species_1$taxon[data_species_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Set specific colors for each taxon
-color_palette <- c("Other (< 3%)" = "#837b8d", "Kluyvera ascorbata" = "#9dcc00",
-                   "Kluyvera sichuanensis" = "#c20088", "Kluyvera intermedia" = "#e0ff66",
-                   "Kluyvera genomosp. 3" = "#990000",
-                   setNames(
-                     paletteer_d("ggsci::default_igv", n = length(unique(
-                       data_species_1$taxon
-                     )) - 1),
-                     unique(data_species_1$taxon[data_species_1$taxon != "Other (< 3%)"])
-                   ))
+color_palette <- c(
+  "Other (< 3%)" = "#837b8d",
+  "Kluyvera ascorbata" = "#9dcc00",
+  "Kluyvera sichuanensis" = "#c20088",
+  "Kluyvera intermedia" = "#e0ff66",
+  "Kluyvera genomosp. 3" = "#990000",
+  setNames(
+    paletteer_d(
+      "ggsci::default_igv",
+      n = length(unique(
+        data_species_1$taxon
+      )) -
+        1
+    ),
+    unique(data_species_1$taxon[data_species_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Plotting with refined grid settings
-species <- ggplot(data_species_1,
-                  aes(x = Sample_id, y = total_percentage, fill = taxon)) +
+species <- ggplot(
+  data_species_1,
+  aes(x = Sample_id, y = total_percentage, fill = taxon)
+) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_manual(values = color_palette, name = "Species") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
@@ -117,7 +149,12 @@ ggsave(
 ###################
 
 data_genus <- read.csv("data/counts/csv/counts_genus.csv", check.names = F)
-merged_data_genus <- merge(data_genus, metadata, by.x = "Sample_id", by.y = "sample_id")
+merged_data_genus <- merge(
+  data_genus,
+  metadata,
+  by.x = "Sample_id",
+  by.y = "sample_id"
+)
 long_data_genus <- pivot_longer(
   merged_data_genus,
   cols = -c(Sample_id, Group),
@@ -128,8 +165,7 @@ long_data_genus <- select(long_data_genus, Sample_id, Group, taxon, abundance)
 
 summarized_data_genus <- long_data_genus %>%
   group_by(Sample_id, taxon) %>%
-  summarize(total_abundance = sum(abundance, na.rm = TRUE),
-            .groups = 'drop')
+  summarize(total_abundance = sum(abundance, na.rm = TRUE), .groups = 'drop')
 
 
 # Preprocess data to calculate percentages and filter based on conditions
@@ -139,25 +175,40 @@ data_genus_1 <- summarized_data_genus %>%
   ungroup() %>%
   mutate(percentage = (total_abundance / total_abundance_group) * 100) %>%
   #filter(!(Group == "positive" & total_abundance < 1)) %>%
-  mutate(taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))) %>%
+  mutate(
+    taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))
+  ) %>%
   group_by(Sample_id, taxon) %>%
   summarize(total_percentage = sum(percentage), .groups = 'drop') %>%
   arrange(Sample_id, desc(total_percentage))
 
-data_genus_1$taxon <- factor(data_genus_1$taxon, levels = c("Other (< 3%)", unique(data_genus_1$taxon[data_genus_1$taxon != "Other (< 3%)"])))
+data_genus_1$taxon <- factor(
+  data_genus_1$taxon,
+  levels = c(
+    "Other (< 3%)",
+    unique(data_genus_1$taxon[data_genus_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Set specific colors for each taxon
-color_palette <- c("Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
-                   #"Candidatus Kaistella beijingensis" = "#f0e685",
-                   setNames(
-                     paletteer_d("ggsci::default_igv", n = length(unique(data_genus_1$taxon)) -
-                                   1),
-                     unique(data_genus_1$taxon[data_genus_1$taxon != "Other (< 3%)"])
-                   ))
+color_palette <- c(
+  "Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
+  #"Candidatus Kaistella beijingensis" = "#f0e685",
+  setNames(
+    paletteer_d(
+      "ggsci::default_igv",
+      n = length(unique(data_genus_1$taxon)) -
+        1
+    ),
+    unique(data_genus_1$taxon[data_genus_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Plotting with refined grid settings
-genus <- ggplot(data_genus_1,
-                aes(x = Sample_id, y = total_percentage, fill = taxon)) +
+genus <- ggplot(
+  data_genus_1,
+  aes(x = Sample_id, y = total_percentage, fill = taxon)
+) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_manual(values = color_palette, name = "Genus") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
@@ -200,7 +251,12 @@ ggsave(
 ####################
 
 data_family <- read.csv("data/counts/csv/counts_family.csv", check.names = F)
-merged_data_family <- merge(data_family, metadata, by.x = "Sample_id", by.y = "sample_id")
+merged_data_family <- merge(
+  data_family,
+  metadata,
+  by.x = "Sample_id",
+  by.y = "sample_id"
+)
 long_data_family <- pivot_longer(
   merged_data_family,
   cols = -c(Sample_id, Group),
@@ -211,8 +267,7 @@ long_data_family <- select(long_data_family, Sample_id, Group, taxon, abundance)
 
 summarized_data_family <- long_data_family %>%
   group_by(Sample_id, taxon) %>%
-  summarize(total_abundance = sum(abundance, na.rm = TRUE),
-            .groups = 'drop')
+  summarize(total_abundance = sum(abundance, na.rm = TRUE), .groups = 'drop')
 
 
 # Preprocess data to calculate percentages and filter based on conditions
@@ -222,26 +277,42 @@ data_family_1 <- summarized_data_family %>%
   ungroup() %>%
   mutate(percentage = (total_abundance / total_abundance_group) * 100) %>%
   #filter(!(Group == "positive" & total_abundance < 1)) %>%
-  mutate(taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))) %>%
+  mutate(
+    taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))
+  ) %>%
   group_by(Sample_id, taxon) %>%
   summarize(total_percentage = sum(percentage), .groups = 'drop') %>%
   arrange(Sample_id, desc(total_percentage))
 
-data_family_1$taxon <- factor(data_family_1$taxon, levels = c("Other (< 3%)", unique(data_family_1$taxon[data_family_1$taxon != "Other (< 3%)"])))
+data_family_1$taxon <- factor(
+  data_family_1$taxon,
+  levels = c(
+    "Other (< 3%)",
+    unique(data_family_1$taxon[data_family_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Set specific colors for each taxon
-color_palette <- c("Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
-                   #"Candidatus Kaistella beijingensis" = "#f0e685",
-                   setNames(
-                     paletteer_d("ggsci::default_igv", n = length(unique(
-                       data_family_1$taxon
-                     )) - 1),
-                     unique(data_family_1$taxon[data_family_1$taxon != "Other (< 3%)"])
-                   ))
+color_palette <- c(
+  "Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
+  #"Candidatus Kaistella beijingensis" = "#f0e685",
+  setNames(
+    paletteer_d(
+      "ggsci::default_igv",
+      n = length(unique(
+        data_family_1$taxon
+      )) -
+        1
+    ),
+    unique(data_family_1$taxon[data_family_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Plotting with refined grid settings
-family <- ggplot(data_family_1,
-                 aes(x = Sample_id, y = total_percentage, fill = taxon)) +
+family <- ggplot(
+  data_family_1,
+  aes(x = Sample_id, y = total_percentage, fill = taxon)
+) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_manual(values = color_palette, name = "Family") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
@@ -284,7 +355,12 @@ ggsave(
 ###################
 
 data_order <- read.csv("data/counts/csv/counts_order.csv", check.names = F)
-merged_data_order <- merge(data_order, metadata, by.x = "Sample_id", by.y = "sample_id")
+merged_data_order <- merge(
+  data_order,
+  metadata,
+  by.x = "Sample_id",
+  by.y = "sample_id"
+)
 long_data_order <- pivot_longer(
   merged_data_order,
   cols = -c(Sample_id, Group),
@@ -295,8 +371,7 @@ long_data_order <- select(long_data_order, Sample_id, Group, taxon, abundance)
 
 summarized_data_order <- long_data_order %>%
   group_by(Sample_id, taxon) %>%
-  summarize(total_abundance = sum(abundance, na.rm = TRUE),
-            .groups = 'drop')
+  summarize(total_abundance = sum(abundance, na.rm = TRUE), .groups = 'drop')
 
 
 # Preprocess data to calculate percentages and filter based on conditions
@@ -306,25 +381,40 @@ data_order_1 <- summarized_data_order %>%
   ungroup() %>%
   mutate(percentage = (total_abundance / total_abundance_group) * 100) %>%
   #filter(!(Group == "positive" & total_abundance < 1)) %>%
-  mutate(taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))) %>%
+  mutate(
+    taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))
+  ) %>%
   group_by(Sample_id, taxon) %>%
   summarize(total_percentage = sum(percentage), .groups = 'drop') %>%
   arrange(Sample_id, desc(total_percentage))
 
-data_order_1$taxon <- factor(data_order_1$taxon, levels = c("Other (< 3%)", unique(data_order_1$taxon[data_order_1$taxon != "Other (< 3%)"])))
+data_order_1$taxon <- factor(
+  data_order_1$taxon,
+  levels = c(
+    "Other (< 3%)",
+    unique(data_order_1$taxon[data_order_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Set specific colors for each taxon
-color_palette <- c("Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
-                   #"Candidatus Kaistella beijingensis" = "#f0e685",
-                   setNames(
-                     paletteer_d("ggsci::default_igv", n = length(unique(data_order_1$taxon)) -
-                                   1),
-                     unique(data_order_1$taxon[data_order_1$taxon != "Other (< 3%)"])
-                   ))
+color_palette <- c(
+  "Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
+  #"Candidatus Kaistella beijingensis" = "#f0e685",
+  setNames(
+    paletteer_d(
+      "ggsci::default_igv",
+      n = length(unique(data_order_1$taxon)) -
+        1
+    ),
+    unique(data_order_1$taxon[data_order_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Plotting with refined grid settings
-order <- ggplot(data_order_1,
-                aes(x = Sample_id, y = total_percentage, fill = taxon)) +
+order <- ggplot(
+  data_order_1,
+  aes(x = Sample_id, y = total_percentage, fill = taxon)
+) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_manual(values = color_palette, name = "Order") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
@@ -367,7 +457,12 @@ ggsave(
 ###################
 
 data_class <- read.csv("data/counts/csv/counts_class.csv", check.names = F)
-merged_data_class <- merge(data_class, metadata, by.x = "Sample_id", by.y = "sample_id")
+merged_data_class <- merge(
+  data_class,
+  metadata,
+  by.x = "Sample_id",
+  by.y = "sample_id"
+)
 long_data_class <- pivot_longer(
   merged_data_class,
   cols = -c(Sample_id, Group),
@@ -378,8 +473,7 @@ long_data_class <- select(long_data_class, Sample_id, Group, taxon, abundance)
 
 summarized_data_class <- long_data_class %>%
   group_by(Sample_id, taxon) %>%
-  summarize(total_abundance = sum(abundance, na.rm = TRUE),
-            .groups = 'drop')
+  summarize(total_abundance = sum(abundance, na.rm = TRUE), .groups = 'drop')
 
 
 # Preprocess data to calculate percentages and filter based on conditions
@@ -389,25 +483,40 @@ data_class_1 <- summarized_data_class %>%
   ungroup() %>%
   mutate(percentage = (total_abundance / total_abundance_group) * 100) %>%
   #filter(!(Group == "positive" & total_abundance < 1)) %>%
-  mutate(taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))) %>%
+  mutate(
+    taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))
+  ) %>%
   group_by(Sample_id, taxon) %>%
   summarize(total_percentage = sum(percentage), .groups = 'drop') %>%
   arrange(Sample_id, desc(total_percentage))
 
-data_class_1$taxon <- factor(data_class_1$taxon, levels = c("Other (< 3%)", unique(data_class_1$taxon[data_class_1$taxon != "Other (< 3%)"])))
+data_class_1$taxon <- factor(
+  data_class_1$taxon,
+  levels = c(
+    "Other (< 3%)",
+    unique(data_class_1$taxon[data_class_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Set specific colors for each taxon
-color_palette <- c("Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
-                   #"Candidatus Kaistella beijingensis" = "#f0e685",
-                   setNames(
-                     paletteer_d("ggsci::default_igv", n = length(unique(data_class_1$taxon)) -
-                                   1),
-                     unique(data_class_1$taxon[data_class_1$taxon != "Other (< 3%)"])
-                   ))
+color_palette <- c(
+  "Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
+  #"Candidatus Kaistella beijingensis" = "#f0e685",
+  setNames(
+    paletteer_d(
+      "ggsci::default_igv",
+      n = length(unique(data_class_1$taxon)) -
+        1
+    ),
+    unique(data_class_1$taxon[data_class_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Plotting with refined grid settings
-class <- ggplot(data_class_1,
-                aes(x = Sample_id, y = total_percentage, fill = taxon)) +
+class <- ggplot(
+  data_class_1,
+  aes(x = Sample_id, y = total_percentage, fill = taxon)
+) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_manual(values = color_palette, name = "Class") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
@@ -450,7 +559,12 @@ ggsave(
 ####################
 
 data_phylum <- read.csv("data/counts/csv/counts_phylum.csv", check.names = F)
-merged_data_phylum <- merge(data_phylum, metadata, by.x = "Sample_id", by.y = "sample_id")
+merged_data_phylum <- merge(
+  data_phylum,
+  metadata,
+  by.x = "Sample_id",
+  by.y = "sample_id"
+)
 long_data_phylum <- pivot_longer(
   merged_data_phylum,
   cols = -c(Sample_id, Group),
@@ -461,8 +575,7 @@ long_data_phylum <- select(long_data_phylum, Sample_id, Group, taxon, abundance)
 
 summarized_data_phylum <- long_data_phylum %>%
   group_by(Sample_id, taxon) %>%
-  summarize(total_abundance = sum(abundance, na.rm = TRUE),
-            .groups = 'drop')
+  summarize(total_abundance = sum(abundance, na.rm = TRUE), .groups = 'drop')
 
 
 # Preprocess data to calculate percentages and filter based on conditions
@@ -472,26 +585,42 @@ data_phylum_1 <- summarized_data_phylum %>%
   ungroup() %>%
   mutate(percentage = (total_abundance / total_abundance_group) * 100) %>%
   #filter(!(Group == "positive" & total_abundance < 1)) %>%
-  mutate(taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))) %>%
+  mutate(
+    taxon = ifelse(percentage < 3, "Other (< 3%)", as.character(taxon))
+  ) %>%
   group_by(Sample_id, taxon) %>%
   summarize(total_percentage = sum(percentage), .groups = 'drop') %>%
   arrange(Sample_id, desc(total_percentage))
 
-data_phylum_1$taxon <- factor(data_phylum_1$taxon, levels = c("Other (< 3%)", unique(data_phylum_1$taxon[data_phylum_1$taxon != "Other (< 3%)"])))
+data_phylum_1$taxon <- factor(
+  data_phylum_1$taxon,
+  levels = c(
+    "Other (< 3%)",
+    unique(data_phylum_1$taxon[data_phylum_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Set specific colors for each taxon
-color_palette <- c("Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
-                   #"Candidatus Kaistella beijingensis" = "#f0e685",
-                   setNames(
-                     paletteer_d("ggsci::default_igv", n = length(unique(
-                       data_phylum_1$taxon
-                     )) - 1),
-                     unique(data_phylum_1$taxon[data_phylum_1$taxon != "Other (< 3%)"])
-                   ))
+color_palette <- c(
+  "Other (< 3%)" = "#837b8d", #"Bradyrhizobium sp. BTAi1" = "#ce3d32",
+  #"Candidatus Kaistella beijingensis" = "#f0e685",
+  setNames(
+    paletteer_d(
+      "ggsci::default_igv",
+      n = length(unique(
+        data_phylum_1$taxon
+      )) -
+        1
+    ),
+    unique(data_phylum_1$taxon[data_phylum_1$taxon != "Other (< 3%)"])
+  )
+)
 
 # Plotting with refined grid settings
-phylum <- ggplot(data_phylum_1,
-                 aes(x = Sample_id, y = total_percentage, fill = taxon)) +
+phylum <- ggplot(
+  data_phylum_1,
+  aes(x = Sample_id, y = total_percentage, fill = taxon)
+) +
   geom_bar(stat = "identity", width = 0.7) +
   scale_fill_manual(values = color_palette, name = "Phylum") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
@@ -533,7 +662,9 @@ ggsave(
 ###### COMBINED ######
 ######################
 
-RA_everything <- (phylum + class + order) / (family + genus + species) + plot_annotation(tag_levels = list(c("A", "B", "C", "D", "E", "F")))
+RA_everything <- (phylum + class + order) /
+  (family + genus + species) +
+  plot_annotation(tag_levels = list(c("A", "B", "C", "D", "E", "F")))
 ggsave(
   "images/RA_everything.png",
   plot = RA_everything,
@@ -542,7 +673,10 @@ ggsave(
   dpi = 600
 )
 
-RA_combined <- phylum + family + species + plot_annotation(tag_levels = list(c("A", "B", "C")))
+RA_combined <- phylum +
+  family +
+  species +
+  plot_annotation(tag_levels = list(c("A", "B", "C")))
 ggsave(
   "images/RA_combined.png",
   plot = RA_combined,
@@ -562,18 +696,24 @@ names(Alpha)[7] <- "shannon"
 names(Alpha)[8] <- "eveness"
 Alpha$status <- metadata$Group
 
-shannon_res <- wilcox.test(shannon ~ status,
-                           data = Alpha,
-                           correct = FALSE,
-                           exact = FALSE)
-chao1_res <- wilcox.test(S.chao1 ~ status,
-                         data = Alpha,
-                         correct = FALSE,
-                         exact = FALSE)
-eveness_res <- wilcox.test(eveness ~ status,
-                           data = Alpha,
-                           correct = FALSE,
-                           exact = FALSE)
+shannon_res <- wilcox.test(
+  shannon ~ status,
+  data = Alpha,
+  correct = FALSE,
+  exact = FALSE
+)
+chao1_res <- wilcox.test(
+  S.chao1 ~ status,
+  data = Alpha,
+  correct = FALSE,
+  exact = FALSE
+)
+eveness_res <- wilcox.test(
+  eveness ~ status,
+  data = Alpha,
+  correct = FALSE,
+  exact = FALSE
+)
 
 pvals <- c(shannon_res$p.value, chao1_res$p.value, eveness_res$p.value)
 
@@ -583,7 +723,12 @@ pvals <- c(shannon_res$p.value, chao1_res$p.value, eveness_res$p.value)
 #####################
 
 shannon <- Alpha %>%
-  mutate(status = factor(status, levels = c("Vespertilio murinus", "Nyctalus noctula"))) %>%
+  mutate(
+    status = factor(
+      status,
+      levels = c("Vespertilio murinus", "Nyctalus noctula")
+    )
+  ) %>%
   ggplot(aes(x = status, y = shannon, fill = status)) +
   geom_boxplot(
     width = 0.25,
@@ -614,8 +759,10 @@ shannon <- Alpha %>%
     size = 4.5,
     label.color = NA
   ) +
-  theme(axis.title.x = element_blank(),
-        legend.text = element_markdown(face = "italic")) +
+  theme(
+    axis.title.x = element_blank(),
+    legend.text = element_markdown(face = "italic")
+  ) +
   labs(y = "Shannon index")
 
 #####################
@@ -623,7 +770,12 @@ shannon <- Alpha %>%
 #####################
 
 chao1 <- Alpha %>%
-  mutate(status = factor(status, levels = c("Vespertilio murinus", "Nyctalus noctula"))) %>%
+  mutate(
+    status = factor(
+      status,
+      levels = c("Vespertilio murinus", "Nyctalus noctula")
+    )
+  ) %>%
   ggplot(aes(x = status, y = S.chao1, fill = status)) +
   geom_boxplot(
     width = 0.25,
@@ -655,8 +807,10 @@ chao1 <- Alpha %>%
     size = 4.5,
     label.color = NA
   ) +
-  theme(axis.title.x = element_blank(),
-        legend.text = element_markdown(face = "italic")) +
+  theme(
+    axis.title.x = element_blank(),
+    legend.text = element_markdown(face = "italic")
+  ) +
   labs(y = "Chao1 index")
 
 ####################
@@ -664,7 +818,12 @@ chao1 <- Alpha %>%
 ####################
 
 pielou <- Alpha %>%
-  mutate(status = factor(status, levels = c("Vespertilio murinus", "Nyctalus noctula"))) %>%
+  mutate(
+    status = factor(
+      status,
+      levels = c("Vespertilio murinus", "Nyctalus noctula")
+    )
+  ) %>%
   ggplot(aes(x = status, y = eveness, fill = status)) +
   geom_boxplot(
     width = 0.25,
@@ -695,8 +854,10 @@ pielou <- Alpha %>%
     size = 4.5,
     label.color = NA
   ) +
-  theme(axis.title.x = element_blank(),
-        legend.text = element_markdown(face = "italic")) +
+  theme(
+    axis.title.x = element_blank(),
+    legend.text = element_markdown(face = "italic")
+  ) +
   labs(y = "Pielou index")
 
 
@@ -704,10 +865,12 @@ pielou <- Alpha %>%
 # Beta-diversity #
 ##################
 
-metadata_beta <- read.table('metadata.csv',
-                       sep = ',',
-                       comment = '',
-                       head = T) %>%
+metadata_beta <- read.table(
+  'metadata.csv',
+  sep = ',',
+  comment = '',
+  head = T
+) %>%
   mutate(
     status = factor(Group),
     status = fct_relevel(Group, "Vespertilio murinus", "Nyctalus noctula")
@@ -722,16 +885,20 @@ taxon_counts <- read.table(
 
 # custom labeller for Unicode minus
 minus_label <- function(x) {
-  vapply(x, function(i) {
-    if (is.na(i)) {
-      # drop NA ticks: return blank or NA_character_
-      return(NA_character_)
-    } else if (i < 0) {
-      paste0("\u2212", format(abs(i), nsmall = 1))
-    } else {
-      format(i, nsmall = 1)
-    }
-  }, FUN.VALUE = character(1))
+  vapply(
+    x,
+    function(i) {
+      if (is.na(i)) {
+        # drop NA ticks: return blank or NA_character_
+        return(NA_character_)
+      } else if (i < 0) {
+        paste0("\u2212", format(abs(i), nsmall = 1))
+      } else {
+        format(i, nsmall = 1)
+      }
+    },
+    FUN.VALUE = character(1)
+  )
 }
 
 ##################
@@ -743,9 +910,7 @@ bray <- avgdist(taxon_counts, dmethod = "bray", sample = 10000) %>%
   as_tibble(rownames = "sample_id")
 
 bray_dist_matrix <- bray %>%
-  pivot_longer(cols = -sample_id,
-               names_to = "b",
-               values_to = "distances") %>%
+  pivot_longer(cols = -sample_id, names_to = "b", values_to = "distances") %>%
   dplyr::inner_join(., metadata_beta, by = "sample_id") %>%
   dplyr::inner_join(., metadata_beta, by = c("b" = "sample_id")) %>%
   dplyr::select(sample_id, b, distances) %>%
@@ -762,12 +927,16 @@ colnames(positions_bray) <- c("pcoa1", "pcoa2")
 
 percent_explained_bray <- 100 * pcoa_bray$eig / sum(pcoa_bray$eig)
 
-pretty_pe_bray <- format(round(percent_explained_bray, digits = 1),
-                         nsmall = 1,
-                         trim = TRUE)
+pretty_pe_bray <- format(
+  round(percent_explained_bray, digits = 1),
+  nsmall = 1,
+  trim = TRUE
+)
 
-labels_bray <- c(glue("PCo Axis 1 ({pretty_pe_bray[1]}%)"),
-                 glue("PCo Axis 2 ({pretty_pe_bray[2]}%)"))
+labels_bray <- c(
+  glue("PCo Axis 1 ({pretty_pe_bray[1]}%)"),
+  glue("PCo Axis 2 ({pretty_pe_bray[2]}%)")
+)
 
 PCOA_bray_plot <- positions_bray %>%
   as_tibble(rownames = "sample_id") %>%
@@ -787,9 +956,11 @@ PCOA_bray_plot <- positions_bray %>%
   ) +
   scale_x_continuous(labels = minus_label) +
   scale_y_continuous(labels = minus_label) +
-  guides(color = guide_legend(
-    override.aes = list(shape = 15, size = 4, alpha = 1)
-  )) +
+  guides(
+    color = guide_legend(
+      override.aes = list(shape = 15, size = 4, alpha = 1)
+    )
+  ) +
   stat_ellipse(show.legend = FALSE) +
   annotate(
     geom = 'richtext',
@@ -801,8 +972,10 @@ PCOA_bray_plot <- positions_bray %>%
     label.color = NA
   ) +
   theme_classic() +
-  theme(legend.text = element_text(face = "italic"),
-        legend.position = "bottom") +
+  theme(
+    legend.text = element_text(face = "italic"),
+    legend.position = "bottom"
+  ) +
   theme(text = element_text(size = 16)) +
   ylim(-1.0, 1.1)
 
@@ -815,9 +988,7 @@ jaccard <- avgdist(taxon_counts, dmethod = "jaccard", sample = 10000) %>%
   as_tibble(rownames = "sample_id")
 
 jaccard_dist_matrix <- jaccard %>%
-  pivot_longer(cols = -sample_id,
-               names_to = "b",
-               values_to = "distances") %>%
+  pivot_longer(cols = -sample_id, names_to = "b", values_to = "distances") %>%
   dplyr::inner_join(., metadata_beta, by = "sample_id") %>%
   dplyr::inner_join(., metadata_beta, by = c("b" = "sample_id")) %>%
   dplyr::select(sample_id, b, distances) %>%
@@ -834,9 +1005,11 @@ colnames(positions_jaccard) <- c("pcoa1", "pcoa2")
 
 percent_explained_jaccard <- 100 * pcoa_jaccard$eig / sum(pcoa_jaccard$eig)
 
-pretty_pe_jaccard <- format(round(percent_explained_jaccard, digits = 1),
-                            nsmall = 1,
-                            trim = TRUE)
+pretty_pe_jaccard <- format(
+  round(percent_explained_jaccard, digits = 1),
+  nsmall = 1,
+  trim = TRUE
+)
 
 labels_jaccard <- c(
   glue("PCo Axis 1 ({pretty_pe_jaccard[1]}%)"),
@@ -863,9 +1036,11 @@ PCOA_jaccard_plot <- positions_jaccard %>%
   ) +
   scale_x_continuous(labels = minus_label) +
   scale_y_continuous(labels = minus_label) +
-  guides(color = guide_legend(
-    override.aes = list(shape = 15, size = 4, alpha = 1)
-  )) +
+  guides(
+    color = guide_legend(
+      override.aes = list(shape = 15, size = 4, alpha = 1)
+    )
+  ) +
   stat_ellipse(show.legend = FALSE) +
   annotate(
     geom = 'richtext',
@@ -877,8 +1052,10 @@ PCOA_jaccard_plot <- positions_jaccard %>%
     label.color = NA
   ) +
   theme_classic() +
-  theme(legend.text = element_text(face = "italic"),
-        legend.position = "bottom") +
+  theme(
+    legend.text = element_text(face = "italic"),
+    legend.position = "bottom"
+  ) +
   theme(text = element_text(size = 16))
 
 ######################
@@ -922,16 +1099,17 @@ design <- "AAAAAAAA
            #CCCCCC#
            #DDDDDD#"
 
-wombo_combo <- (free(bars) / free(species) / combined_alpha_2 / combined_beta_2) +
-  plot_layout(widths = c(1),
-              heights = c(4, 4, 4, 4),
-              design = design) +
+wombo_combo <- (free(bars) /
+  free(species) /
+  combined_alpha_2 /
+  combined_beta_2) +
+  plot_layout(widths = c(1), heights = c(4, 4, 4, 4), design = design) +
   plot_annotation(tag_levels = 'A')
 
 wombo_combo[[1]][[1]][[2]] <- wombo_combo[[1]][[1]][[2]] +
   theme(plot.tag.position = c(-0.075, 1))
 #wombo_combo[[1]][[1]][[3]] <- wombo_combo[[1]][[1]][[3]] +
-  #theme(plot.tag.position = c(-0.45, 1))
+#theme(plot.tag.position = c(-0.45, 1))
 
 ggsave(
   "images/wombo_combo.png",

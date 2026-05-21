@@ -1,13 +1,15 @@
 #!/usr/bin/env Rscript
-args <- commandArgs(trailingOnly=TRUE)
+args <- commandArgs(trailingOnly = TRUE)
 
-if (!require("pacman")) install.packages("pacman")
+if (!require("pacman")) {
+    install.packages("pacman")
+}
 
 pacman::p_load(vegan)
 
 data_cult <- read.csv(args[1])
 
-rownames(data_cult) <- data_cult[,1]
+rownames(data_cult) <- data_cult[, 1]
 
 data_cult <- subset(data_cult, select = -Sample_id)
 

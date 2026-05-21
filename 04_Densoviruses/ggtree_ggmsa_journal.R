@@ -1,25 +1,28 @@
 main_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 setwd(main_dir)
 
-if (!require("pacman"))
+if (!require("pacman")) {
   install.packages("pacman")
+}
 
 #if (!requireNamespace("devtools", quietly=TRUE))
 #install.packages("devtools")
 #devtools::install_github("YuLab-SMU/ggmsa")
 
-pacman::p_load(ggtree,
-               ggmsa,
-               ggimage,
-               phangorn,
-               ggplot2,
-               ggplotify,
-               treeio,
-               ggnewscale,
-               viridis,
-               phytools,
-               patchwork,
-               cowplot)
+pacman::p_load(
+  ggtree,
+  ggmsa,
+  ggimage,
+  phangorn,
+  ggplot2,
+  ggplotify,
+  treeio,
+  ggnewscale,
+  viridis,
+  phytools,
+  patchwork,
+  cowplot
+)
 
 
 ####################
@@ -95,8 +98,9 @@ country_code_map <- c(
 metadata$flag_code <- country_code_map[metadata$Country]
 metadata$flag_code[is.na(metadata$flag_code)] <- NA
 
-if (!dir.exists("flags"))
+if (!dir.exists("flags")) {
   dir.create("flags")
+}
 
 flag_urls <- paste0(
   "https://raw.githubusercontent.com/HatScripts/circle-flags/gh-pages/flags/",
@@ -106,9 +110,9 @@ flag_urls <- paste0(
 
 for (i in seq_along(flag_urls)) {
   country_code <- sub(".*/flags/(.*)\\.svg", "\\1", flag_urls[i])
-  
+
   destfile <- paste0("flags/", country_code, ".svg")
-  
+
   download.file(flag_urls[i], destfile, mode = "wb")
 }
 
@@ -129,9 +133,12 @@ labels <- NSP_tree$tip.label
 tipsNSP_filtered <- tipsNSP[tipsNSP$name %in% labels, ]
 df_NSP <- tipsNSP_filtered[match(labels, tipsNSP_filtered$name), ]
 
-df_NSP$uid[df_NSP$name == "NC_077050.1"] <- "036b96de-4bca-408e-adb6-2154fcd724ef"
+df_NSP$uid[
+  df_NSP$name == "NC_077050.1"
+] <- "036b96de-4bca-408e-adb6-2154fcd724ef"
 
-NSP <- ggtree(NSP_tree) %<+% metadata +
+NSP <- ggtree(NSP_tree) %<+%
+  metadata +
   geom_tiplab(
     image = df_NSP$uid,
     geom = "phylopic",
@@ -179,20 +186,24 @@ NSP_boot$bootstrap <- '0'
 NSP_boot$bootstrap[NSP_boot$label >= 70] <- '1'
 NSP_boot$bootstrap[is.na(NSP_boot$label)] <- '1'
 
-NSP <- NSP + new_scale_color() +
+NSP <- NSP +
+  new_scale_color() +
   geom_tree(data = NSP_boot, aes(color = bootstrap == '1')) +
-  scale_color_manual(name = 'Bootstrap',
-                     values = setNames(c("black", "grey"), c(T, F)),
-                     guide = "none")
+  scale_color_manual(
+    name = 'Bootstrap',
+    values = setNames(c("black", "grey"), c(T, F)),
+    guide = "none"
+  )
 
-NSP <- NSP + geom_tiplab(
-  aes(image = flag_path),
-  geom = "image",
-  offset = 1.8,
-  align = TRUE,
-  size = 0.02,
-  linesize = 0
-)
+NSP <- NSP +
+  geom_tiplab(
+    aes(image = flag_path),
+    geom = "image",
+    offset = 1.8,
+    align = TRUE,
+    size = 0.02,
+    linesize = 0
+  )
 
 NSP <- gheatmap(
   NSP,
@@ -248,7 +259,8 @@ labels <- SP_tree$tip.label
 tipsSP_filtered <- tipsSP[tipsSP$name %in% labels, ]
 df_SP <- tipsSP_filtered[match(labels, tipsSP_filtered$name), ]
 
-SP <- ggtree(SP_tree) %<+% metadata +
+SP <- ggtree(SP_tree) %<+%
+  metadata +
   geom_tiplab(
     image = df_SP$uid,
     geom = "phylopic",
@@ -276,20 +288,24 @@ SP_boot$bootstrap <- '0'
 SP_boot$bootstrap[SP_boot$label >= 70] <- '1'
 SP_boot$bootstrap[is.na(SP_boot$label)] <- '1'
 
-SP <- SP + new_scale_color() +
+SP <- SP +
+  new_scale_color() +
   geom_tree(data = SP_boot, aes(color = bootstrap == '1')) +
-  scale_color_manual(name = 'Bootstrap',
-                     values = setNames(c("black", "grey"), c(T, F)),
-                     guide = "none")
+  scale_color_manual(
+    name = 'Bootstrap',
+    values = setNames(c("black", "grey"), c(T, F)),
+    guide = "none"
+  )
 
-SP <- SP + geom_tiplab(
-  aes(image = flag_path),
-  geom = "image",
-  offset = 1.8,
-  align = TRUE,
-  size = 0.04,
-  linesize = 0
-)
+SP <- SP +
+  geom_tiplab(
+    aes(image = flag_path),
+    geom = "image",
+    offset = 1.8,
+    align = TRUE,
+    size = 0.04,
+    linesize = 0
+  )
 
 SP <- gheatmap(
   SP,
@@ -345,7 +361,8 @@ labels <- All_tree$tip.label
 tipsAll_filtered <- tipsAll[tipsAll$name %in% labels, ]
 df_All <- tipsAll_filtered[match(labels, tipsAll_filtered$name), ]
 
-All <- ggtree(All_tree) %<+% metadata +
+All <- ggtree(All_tree) %<+%
+  metadata +
   geom_tiplab(
     image = df_All$uid,
     geom = "phylopic",
@@ -373,20 +390,24 @@ All_boot$bootstrap <- '0'
 All_boot$bootstrap[All_boot$label >= 70] <- '1'
 All_boot$bootstrap[is.na(All_boot$label)] <- '1'
 
-All <- All + new_scale_color() +
+All <- All +
+  new_scale_color() +
   geom_tree(data = All_boot, aes(color = bootstrap == '1')) +
-  scale_color_manual(name = 'Bootstrap',
-                     values = setNames(c("black", "grey"), c(T, F)),
-                     guide = "none")
+  scale_color_manual(
+    name = 'Bootstrap',
+    values = setNames(c("black", "grey"), c(T, F)),
+    guide = "none"
+  )
 
-All <- All + geom_tiplab(
-  aes(image = flag_path),
-  geom = "image",
-  offset = 1.8,
-  align = TRUE,
-  size = 0.04,
-  linesize = 0
-)
+All <- All +
+  geom_tiplab(
+    aes(image = flag_path),
+    geom = "image",
+    offset = 1.8,
+    align = TRUE,
+    size = 0.04,
+    linesize = 0
+  )
 
 All <- gheatmap(
   All,
@@ -434,7 +455,7 @@ ggsave(
 
 # Thanks to https://patchwork.data-imaginist.com/articles/guides/layout.html
 combined_trees <- ((All / SP + plot_layout(guides = 'collect')) |
-               NSP) &
+  NSP) &
   plot_annotation(tag_levels = list(c("A", "B", "C")))
 
 ggsave(
@@ -457,14 +478,18 @@ plot_1 <- ggmsa(
   end = 100,
   char_width = 0.5,
   seq_name = T
-) + geom_seqlogo() + geom_msaBar()
+) +
+  geom_seqlogo() +
+  geom_msaBar()
 plot_2 <- ggmsa(
   protein_sequences,
   start = 101,
   end = 213,
   char_width = 0.5,
   seq_name = T
-) + geom_seqlogo() + geom_msaBar()
+) +
+  geom_seqlogo() +
+  geom_msaBar()
 
 p1 <- as.grob(plot_1)
 p2 <- as.grob(plot_2)
